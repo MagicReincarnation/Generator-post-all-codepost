@@ -274,9 +274,60 @@ async function GetPost() {
     await mainAnime(id, source_dataAnime_FectURL, display_inforSeries);
 }
 
+
+function backup_preset() {
+    const  storage_preset = JSON.parse(localStorage.getItem('storage_preset')) || {};
+    const storage_preset_json = JSON.stringify(storage_preset, null, 2);
+    
+    const blob_preset = new Blob([storage_preset_json], { type: 'application/json' });
+    const url_file_preset = URL.createObjectURL(blob_preset);
+    const buatTaglink = document.createElement('a');
+    buatTaglink.href = url_file_preset;
+    buatTaglink.download = 'preset_Generator_post.json';
+    document.body.appendChild(buatTaglink);
+    buatTaglink.click();
+    document.body.removeChild(buatTaglink);
+    URL.revokeObjectURL(url_file_preset);
+}
+
+function pulihkan_preset(event) {
+    const file_preset = event.target.files[0];
+    if (!file_preset) {
+        alert('harap masukan File cadangan preset kamu');
+        return;
+    }
+
+    const reader_preset = new FileReader();
+    reader_preset.onload = function(e) {
+        try {
+            const pulihkan_preset = JSON.parse(e.target.result);
+     if (typeof pulihkan_preset !== 'object') {
+                alert('format salah!');
+                return;
+            }
+            const storage_preset = JSON.parse(localStorage.getItem('storage_preset')) || {};
+
+            const gabungkan_preset = { ...storage_preset, ...pulihkan_preset };
+            localStorage.setItem('storage_preset', JSON.stringify(gabungkan_preset));
+
+            alert('Cadangan preset berhasil dipulihkan');
+            loadOpsi_preset();
+        } catch (err) {
+            alert('Error parsing file!');
+        }
+    };
+
+    reader_preset.readAsText(file_preset);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadOpsi_preset();
     setupTabs();
+    document.getElementById('backup_preset_codepost').addEventListener('click', backup_preset);
+   document.getElementById('pulihkan_preset_codepost').addEventListener('change', pulihkan_preset);
+    document.getElementById('btn_pulihkan_preset_codepost').addEventListener('click', () => {
+        document.getElementById('pulihkan_preset_codepost').click();
+    });
     document.getElementById('preset_ON').addEventListener('change', loadpilihan_preset);
     document.getElementById('svbutton').addEventListener('click', savePreset);
     document.getElementById('hapus_presetTersimpan').addEventListener('click', hapus_presetTersimpan);
