@@ -32,8 +32,6 @@ if (blogId && apiKey){
 alert('IdBlog dan API belum dipasang');
   }
 }
-
-// Event listener untuk tombol posting
 document.getElementById('post-button').addEventListener('click', () => {
   const title = document.getElementById('blogger-title').value;
   const labels = document.getElementById('blogger-labels').value;
