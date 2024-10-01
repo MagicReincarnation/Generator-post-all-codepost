@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Generator</title>
+  <style>
+  .cc_getpost {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            flex: 1;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            text-align: center;
+            cursor: pointer;
+        }
+        .tab.active {
+            background-color: #e0e0e0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+  
+  
+  <!--
+Anilist 
+
+<div class="anime-info">
+    <h1>{{titleRomaji}}</h1>
+
+ <div class="banner-image">
+        <img src="{{bannerImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
+    </div>
+    
+    <div class="cover-image">
+        <img src="{{coverImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/></div>
+        
+    <h2>Alternative Titles</h2>
+    <p><strong>Romaji:</strong> {{titleRomaji}}</p>
+    <p><strong>English:</strong> {{titleEnglish}}</p>
+    <p><strong>Japanese:</strong> {{titleJapanese}}</p>
+
+    <h2>Description</h2>
+    <p>{{description}}</p>
+
+    <h2>Details</h2>
+    <p><strong>Format:</strong> {{format}}</p>
+    <p><strong>type:</strong> {{type}}</p>
+    <p><strong>Episodes:</strong> {{episodes}}</p>
+    <p><strong>Status:</strong> {{status}}</p>
+    <p><strong>Start Date:</strong> {{startDate}}</p>
+    <p><strong>End Date:</strong> {{endDate}}</p>
+    <p><strong>Season:</strong> {{season}}</p>
+    <p><strong>Season Year:</strong> {{seasonYear}}</p>
+    <p><strong>Average Score:</strong> {{averageScore}}%</p>
+    <p><strong>Mean Score:</strong> {{meanScore}}%</p>
+    <p><strong>Popularity:</strong> {{popularity}}</p>
+    <p><strong>Producers:</strong> {{producers}}</p>
+    <p><strong>Source:</strong> {{source}}</p>
+    <p><strong>Genres:</strong> {{genres}}</p>
+
+    <h2>Characters & Voice Actors</h2>
+    <div>{{characters}}</div>
+</div>
+
+
+Jikan 
+
+<div class="anime-info">
+    <h1>{{title}}</h1>
+    <div class="cover-image">
+        <img src="{{coverImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
+    </div>
+
+    <h2>Alternative Titles</h2>
+    <p><strong>Romaji:</strong> {{titleRomaji}}</p>
+    <p><strong>English:</strong> {{titleEnglish}}</p>
+    <p><strong>Japanese:</strong> {{titleJapanese}}</p>
+
+
+    <h2>Description</h2>
+    <p>{{description}}</p>
+
+    <h2>Details</h2>
+    <p><strong>Type:</strong> {{type}}</p>
+    <p><strong>Episodes:</strong> {{episodes}}</p>
+    <p><strong>Episode Duration:</strong> {{duration}}</p>
+    <p><strong>Status:</strong> {{status}}</p>
+    <p><strong>Aired:</strong> {{aired}}</p>
+    <p><strong>Premiered:</strong> {{premiered}}</p>
+    <p><strong>Broadcast:</strong> {{broadcast}}</p>
+    <p><strong>Average Score:</strong> {{averageScore}}</p>
+    <p><strong>Popularity:</strong> {{popularity}}</p>
+    <p><strong>Studios:</strong> {{studios}}</p>
+    <p><strong>Producers:</strong> {{producers}}</p>
+    <p><strong>Licensors:</strong> {{licensors}}</p>
+    <p><strong>Genres:</strong> {{genres}}</p>
+    <p><strong>Demographic:</strong> {{demographic}}</p>
+
+    <p><strong>Source Informasi:</strong> {{sourceID}}</p>
+
+    <p><strong>Source GetPost:</strong> {{source}}</p>
+
+<p><strong>Rating:</strong> {{rating}}</p>
+</div>
+
+-->
+  
+  <div class="faq-section">
+    <h2>FAQ: README</h2>    
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">1. Apa itu Format Postingan?</h3>
+        <div class="faq-answer">
+         <p>Format postingan adalah Code Post yang dapat kamu buat untuk menampilkan data anime. kamu dapat menggunakan {{data}} (yang diambil dari API.) untuk mengisi data code post kamu.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">2. data Apa yang Tersedia?</h3>
+        <div class="faq-answer">
+            <ul>
+                <li><strong>{{title}}</strong>: Judul anime.</li>
+                <li><strong>{{description}}</strong>: Deskripsi anime.</li>
+                <li><strong>{{bannerImage}}</strong>: URL gambar banner anime.</li>
+                <li><strong>{{coverImage}}</strong>: URL gambar cover anime.</li>
+                <li><strong>{{studios}}</strong>: Daftar studio yang memproduksi anime.</li>
+                <li><strong>{{genres}}</strong>: Daftar genre anime.</li>
+                <li><strong>{{episodes}}</strong>: Jumlah episode anime.</li>
+                <li><strong>{{duration}}</strong>: Durasi per episode anime.</li>
+                <li><strong>{{popularity}}</strong>: Popularitas anime (nilai numerik).</li>
+                <li><strong>{{averageScore}}</strong>: Rata-rata skor anime (nilai numerik).</li>
+                <li><strong>{{characters}}</strong>: Daftar karakter anime, termasuk gambar dan nama mereka.</li>
+            </ul>
+         <b>Lebih lengkap silahkan cek contohnya di FAQ 'Contoh Format Postingan'</b>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">3. Contoh Format Postingan</h3>
+        <div class="faq-answer">
+<p>Data yang dapat diambil dari Anilist dan MAL sedikit berbeda..</p>
+<b>contoh seperti ini</b>
+<h2>Anilist</h2>
+<ul>
+    <li><strong>{{title}}:</strong> Judul utama anime.</li>
+    <li><strong>{{bannerImage}}:</strong> URL gambar banner dari anime.</li>
+    <li><strong>{{coverImageExtraLarge}}:</strong> URL gambar cover ukuran extra besar dari anime.</li>
+    <li><strong>{{coverImageLarge}}:</strong> URL gambar cover ukuran besar dari anime.</li>
+    <li><strong>{{coverImageMedium}}:</strong> URL gambar cover ukuran medium dari anime.</li>
+    <li><strong>{{titleRomaji}}:</strong> Judul anime dalam Romaji (alfabet Latin berdasarkan pengucapan Jepang).</li>
+    <li><strong>{{titleEnglish}}:</strong> Judul anime dalam bahasa Inggris.</li>
+    <li><strong>{{titleJapanese}}:</strong> Judul anime dalam bahasa Jepang (kanji atau kana).</li>
+    <li><strong>{{description}}:</strong> Deskripsi atau sinopsis dari anime.</li>
+    <li><strong>{{format}}:</strong> Format anime (misalnya: TV, Movie, OVA).</li>
+    <li><strong>{{type}}:</strong> Jenis anime, apakah serial atau film.</li>
+    <li><strong>{{episodes}}:</strong> Jumlah total episode anime.</li>
+    <li><strong>{{status}}:</strong> Status anime (misalnya: Finished, Ongoing).</li>
+    <li><strong>{{startDate}}:</strong> Tanggal mulai penayangan anime.</li>
+    <li><strong>{{endDate}}:</strong> Tanggal akhir penayangan anime.</li>
+    <li><strong>{{season}}:</strong> Musim penayangan anime (misalnya: Winter, Spring).</li>
+    <li><strong>{{seasonYear}}:</strong> Tahun penayangan anime sesuai musimnya.</li>
+    <li><strong>{{averageScore}}:</strong> Skor rata-rata dari penilaian pengguna, dalam persen.</li>
+    <li><strong>{{meanScore}}:</strong> Skor rata-rata keseluruhan dari semua penilaian, dalam persen.</li>
+    <li><strong>{{popularity}}:</strong> Popularitas anime berdasarkan jumlah penggemar atau peringkat.</li>
+    <li><strong>{{producers}}:</strong> Nama-nama produser yang terlibat dalam pembuatan anime.</li>
+    <li><strong>{{genres}}:</strong> Genre atau jenis cerita anime (misalnya: Action, Comedy, Drama).</li>
+    <li><strong>{{source}}:</strong> Sumber cerita anime (misalnya: Manga, Novel, Original).</li>
+</ul>
+<pre><code>
+&lt;div class=&quot;anime-info&quot;&gt;
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+
+ &lt;div class=&quot;banner-image&quot;&gt;
+        &lt;img src=&quot;{{bannerImage}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;cover-image&quot;&gt;
+
+&lt;h2&gt; Gambar size Extra large 
+&lt;/h2&gt;
+
+&lt;img src=&quot;{{coverImageExtraLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot;/&gt;
+
+&lt;h2&gt; Gambar size large 
+&lt;/h2&gt;
+      
+&lt;img src=&quot;{{coverImageLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot;/&gt;
+
+&lt;h2&gt; Gambar size medium
+&lt;/h2&gt;
+      
+&lt;img src=&quot;{{coverImageMedium}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot;/&gt;
+
+&lt;/div&gt;
+  
+    &lt;h2&gt;Alternative Titles&lt;/h2&gt;
+    &lt;p&gt;&lt;strong&gt;Romaji:&lt;/strong&gt; {{titleRomaji}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;English:&lt;/strong&gt; {{titleEnglish}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Native:&lt;/strong&gt; {{titleJapanese}}&lt;/p&gt;
+
+    &lt;h2&gt;Description&lt;/h2&gt;
+    &lt;p&gt;{{description}}&lt;/p&gt;
+
+    &lt;h2&gt;Details&lt;/h2&gt;
+    &lt;p&gt;&lt;strong&gt;Format:&lt;/strong&gt; {{format}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;type:&lt;/strong&gt; {{type}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Episodes:&lt;/strong&gt; {{episodes}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; {{status}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Start Date:&lt;/strong&gt; {{startDate}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;End Date:&lt;/strong&gt; {{endDate}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Season:&lt;/strong&gt; {{season}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Season Year:&lt;/strong&gt; {{seasonYear}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Average Score:&lt;/strong&gt; {{averageScore}}%&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Mean Score:&lt;/strong&gt; {{meanScore}}%&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Popularity:&lt;/strong&gt; {{popularity}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Producers:&lt;/strong&gt; {{producers}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Genres:&lt;/strong&gt; {{genres}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Source:&lt;/strong&gt; {{source}}&lt;/p&gt;
+    &lt;h2&gt;Characters&lt;/h2&gt;
+    &lt;div&gt;{{characters}}&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h2>MAL</h2>
+<ul>
+    <li><strong>{{title}}:</strong> Judul utama anime.</li>
+    <li><strong>{{coverImage}}:</strong> URL gambar cover dari anime.</li>
+
+    <li><strong>{{titleRomaji}}:</strong> Judul anime dalam Romaji (alfabet Latin berdasarkan pengucapan Jepang).</li>
+    <li><strong>{{titleEnglish}}:</strong> Judul anime dalam bahasa Inggris.</li>
+    <li><strong>{{titleJapanese}}:</strong> Judul anime dalam bahasa Jepang (kanji atau kana).</li>
+    <li><strong>{{titleSynonyms}}:</strong> Sinonim atau judul alternatif lainnya yang pernah digunakan untuk anime ini.</li>
+
+    <li><strong>{{description}}:</strong> Deskripsi atau sinopsis dari anime.</li>
+
+    <li><strong>{{type}}:</strong> Jenis atau format anime (misalnya: TV, Movie, OVA).</li>
+    <li><strong>{{episodes}}:</strong> Jumlah total episode anime.</li>
+    <li><strong>{{duration}}:</strong> Durasi rata-rata setiap episode dalam menit.</li>
+    <li><strong>{{status}}:</strong> Status anime (misalnya: Finished, Ongoing).</li>
+    <li><strong>{{aired}}:</strong> Rentang tanggal penayangan anime.</li>
+    <li><strong>{{premiered}}:</strong> Musim dan tahun pertama kali anime ditayangkan (misalnya: Spring 2023).</li>
+    <li><strong>{{broadcast}}:</strong> Informasi tentang waktu siaran anime (misalnya: setiap hari Rabu pukul 22:00).</li>
+
+    <li><strong>{{averageScore}}:</strong> Skor rata-rata dari penilaian pengguna.</li>
+    <li><strong>{{popularity}}:</strong> Popularitas anime berdasarkan jumlah penonton atau penggemar.</li>
+
+    <li><strong>{{studios}}:</strong> Studio animasi yang memproduksi anime.</li>
+    <li><strong>{{producers}}:</strong> Perusahaan produser yang terlibat dalam produksi anime.</li>
+    <li><strong>{{licensors}}:</strong> Perusahaan yang mendapatkan lisensi distribusi anime di luar negeri.</li>
+
+    <li><strong>{{genres}}:</strong> Genre atau kategori utama anime (misalnya: Action, Comedy, Drama).</li>
+    <li><strong>{{demographic}}:</strong> Target penonton berdasarkan demografi (misalnya: Shounen, Seinen).</li>
+
+    <li><strong>{{sourceID}}:</strong> ID sumber informasi anime (misalnya: ID pada database seperti MyAnimeList atau Anilist).</li>
+    <li><strong>{{source}}:</strong> Sumber data atau cerita asli anime (misalnya: Manga, Novel, Original).</li>
+
+    <li><strong>{{rating}}:</strong> Klasifikasi usia atau rating anime (misalnya: PG-13, R-17).</li>
+</ul>
+<pre><code>
+&lt;div class=&quot;anime-info&quot;&gt;
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+    &lt;div class=&quot;cover-image&quot;&gt;
+        &lt;img src=&quot;{{coverImage}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
+    &lt;/div&gt;
+
+    &lt;h2&gt;Alternative Titles&lt;/h2&gt;
+    &lt;p&gt;&lt;strong&gt;Romaji:&lt;/strong&gt; {{titleRomaji}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;English:&lt;/strong&gt; {{titleEnglish}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Japanese:&lt;/strong&gt; {{titleJapanese}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Synonyms:&lt;/strong&gt; {{titleSynonyms}}&lt;/p&gt;
+
+    &lt;h2&gt;Description&lt;/h2&gt;
+    &lt;p&gt;{{description}}&lt;/p&gt;
+
+    &lt;h2&gt;Details&lt;/h2&gt;
+    &lt;p&gt;&lt;strong&gt;Type:&lt;/strong&gt; {{type}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Episodes:&lt;/strong&gt; {{episodes}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Episode Duration:&lt;/strong&gt; {{duration}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; {{status}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Aired:&lt;/strong&gt; {{aired}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Premiered:&lt;/strong&gt; {{premiered}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Broadcast:&lt;/strong&gt; {{broadcast}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Average Score:&lt;/strong&gt; {{averageScore}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Popularity:&lt;/strong&gt; {{popularity}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Studios:&lt;/strong&gt; {{studios}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Producers:&lt;/strong&gt; {{producers}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Licensors:&lt;/strong&gt; {{licensors}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Genres:&lt;/strong&gt; {{genres}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Demographic:&lt;/strong&gt; {{demographic}}&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;Source Informasi:&lt;/strong&gt; {{sourceID}}&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;Source GetPost:&lt;/strong&gt; {{source}}&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Rating:&lt;/strong&gt; {{rating}}&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">4. Bagaimana Cara Menggunakan Generator Post ini?</h3>
+        <div class="faq-answer">
+            <ol>
+                <li><strong>Langkah 1:</strong> Tulis format postingan di textarea yang disediakan.</li>
+                <li><strong>Langkah 2:</strong> Gunakan {{data}} di dalam format post sesuai dengan data yang ingin ditampilkan.</li>
+                
+                <li><strong>Langkah 3:</strong> Klik tombol "Save Format post" untuk menyimpan format ke localStorage.</li>
+                
+                <li><strong>Langkah 4:</strong> Pilih Sumber ID Anime yang akan kamu gunakan</li>
+                                <li><strong>Langkah 5:</strong> Masukan ID Anime kedalam input "ENTER ID" dan Click "GetPost" </li>
+
+<li><strong>Langkah 6:</strong> Silahkan double cek data yg didapat apakah sudah benar, jika sudah maka copy dan paste ke blog kamu.(selesai)</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">5. Dapatkah Aku Mengubah Format Postingan Setelah Menyimpannya?</h3>
+        <div class="faq-answer">
+            <p>Ya, Kamu dapat mengubah format postingan kapan saja. Cukup masukkan format baru di textarea dan simpan lagi. Format baru akan menggantikan yang lama.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">6. Bagaimana Jika Aku Ingin Menghapus Format yang Disimpan?</h3>
+        <div class="faq-answer">
+            <p>Untuk menghapus format yang disimpan, Kamu dapat membuka developer console di browser dan menjalankan perintah berikut:</p>
+            <pre><code>localStorage.removeItem('postFormat');</code></pre>
+            <p>Ini akan menghapus format yang disimpan dari localStorage.</p>
+            <b>Atau kamu bisa melakukan clear localstroage dari browsernya langsung</b>
+        </div>
+    </div>
+</div>
+
+
+<style>
+.faq-section {
+        margin: 20px;
+        font-family: Arial, sans-serif;
+    }
+    
+    .faq-question {
+        cursor: pointer;
+        background-color: #f1f1f1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin-top: 5px;
+    }
+    
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-top: none;
+        background-color: #fff;
+    }
+    
+    pre {
+        background: #f8f8f8;
+        padding: 10px;
+        border: 1px solid #ddd;
+        overflow: auto;
+    }  
+</style>
+
+<script>
+    function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        answer.style.display = answer.style.display === "block" ? "none" : "block";
+    }
+</script>
+
+
+<textarea id="formatpost" rows="10" placeholder="Code post"></textarea>
+    <button id="svbutton">Save Format post</button>
+    
+    
+    <!--<button id="loadbutton">Load Saved Format</button>-->
+    
+    
+<div class="cc_getpost">
+    <h1>GET POST</h1>
+    <p>Generate blog posts data AniList, MyAnimeList</p>
+    <label for="source_dataAnime_FectURL">Select Data Source:</label>
+    <select id="source_dataAnime_FectURL">
+        <option value="anilist">AniList (work)</option>
+        <option value="jikan">MyAnimeList (work)</option>
+    </select>
+
+    <label for="id-input">Enter ID:</label>
+    <input value="162804" type="text" id="id-input" placeholder="Enter ID from selected platform">
+
+    <button onclick="GetPost()">GePost</button>
+
+    <div>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab(0)">Code</button>
+            <button class="tab" onclick="showTab(1)">Preview</button>
+        </div>
+
+        <div class="tab-content active" id="result-code">
+         <h2>Result Code</h2>
+         <textarea id="blogger-title" rows="1" placeholder="Title"></textarea>
+         <textarea id="blogger-labels" rows="3" placeholder="Label"></textarea>
+          <textarea id="blogger-content" rows="20" placeholder="Content"></textarea>
+         <button id="post-button">Post to Blogger</button>
+        </div>
+
+        <div class="tab-content" id="result-preview">   <h2>Result Preview</h2>
+            <div id="post-result"></div>
+        </div>
+        
+    </div>
+</div>
+
+ 
+ <script src="modular_v2.js"></script>
+ <script src="main.js"></script>
+ <script src="rendering.js"></script>
+<script src="https://apis.google.com/js/api.js"></script> 
+</body>
+</html>
