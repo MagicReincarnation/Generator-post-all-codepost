@@ -1,16 +1,190 @@
-function saveFormat(format) {
-localStorage.setItem('postFormat', format);
-        }
-        
-function loadFormat() {
-            return localStorage.getItem('postFormat') || '';
-        }
-function display_inforSeries(data) {
-  const format = loadFormat();
-  let postContent;
+// Preset Default
+const presetDefault = {
+    DEFAULT: `Buat Baru (gak perlu diubah)`,
+    yugen: `Code post Yugen`,
+    hexanime: `Code post Hexanime`,
+   
+    anilist_demo: `<div class="anime-info">
+    <h1>{{title}}</h1>
+ <div class="banner-image">
+        <img src="{{bannerImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
+    </div>
+    
+    <div class="cover-image">
+
+<h2> Gambar size Extra large 
+</h2>
+
+<img src="{{coverImageExtraLarge}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/>
+
+<h2> Gambar size large 
+</h2>
+      
+<img src="{{coverImageLarge}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/>
+
+<h2> Gambar size medium
+</h2>
+      
+<img src="{{coverImageMedium}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/>
+
+</div>
   
-  if (data.source === 'Jikan') {
-    postContent = format
+    <h2>Alternative Titles</h2>
+    <p><strong>Romaji:</strong> {{titleRomaji}}</p>
+    <p><strong>English:</strong> {{titleEnglish}}</p>
+    <p><strong>Native:</strong> {{titleJapanese}}</p>
+
+    <h2>Description</h2>
+    <p>{{description}}</p>
+
+    <h2>Details</h2>
+    <p><strong>Format:</strong> {{format}}</p>
+    <p><strong>type:</strong> {{type}}</p>
+    <p><strong>Episodes:</strong> {{episodes}}</p>
+    <p><strong>Status:</strong> {{status}}</p>
+    <p><strong>Start Date:</strong> {{startDate}}</p>
+    <p><strong>End Date:</strong> {{endDate}}</p>
+    <p><strong>Season:</strong> {{season}}</p>
+    <p><strong>Season Year:</strong> {{seasonYear}}</p>
+    <p><strong>Average Score:</strong> {{averageScore}}%</p>
+    <p><strong>Mean Score:</strong> {{meanScore}}%</p>
+    <p><strong>Popularity:</strong> {{popularity}}</p>
+    <p><strong>Producers:</strong> {{producers}}</p>
+    <p><strong>Genres:</strong> {{genres}}</p>
+    <p><strong>Source:</strong> {{source}}</p>
+    <h2>Characters</h2>
+    <div>{{characters}}</div>
+</div>`,
+
+   MAL_demo: `<div class="anime-info">
+    <h1>{{title}}</h1>
+    <div class="cover-image">
+        <img src="{{coverImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
+    </div>
+
+    <h2>Alternative Titles</h2>
+    <p><strong>Romaji:</strong> {{titleRomaji}}</p>
+    <p><strong>English:</strong> {{titleEnglish}}</p>
+    <p><strong>Japanese:</strong> {{titleJapanese}}</p>
+    <p><strong>Synonyms:</strong> {{titleSynonyms}}</p>
+
+    <h2>Description</h2>
+    <p>{{description}}</p>
+
+    <h2>Details</h2>
+    <p><strong>Type:</strong> {{type}}</p>
+    <p><strong>Episodes:</strong> {{episodes}}</p>
+    <p><strong>Episode Duration:</strong> {{duration}}</p>
+    <p><strong>Status:</strong> {{status}}</p>
+    <p><strong>Aired:</strong> {{aired}}</p>
+    <p><strong>Premiered:</strong> {{premiered}}</p>
+    <p><strong>Broadcast:</strong> {{broadcast}}</p>
+    <p><strong>Average Score:</strong> {{averageScore}}</p>
+    <p><strong>Popularity:</strong> {{popularity}}</p>
+    <p><strong>Studios:</strong> {{studios}}</p>
+    <p><strong>Producers:</strong> {{producers}}</p>
+    <p><strong>Licensors:</strong> {{licensors}}</p>
+    <p><strong>Genres:</strong> {{genres}}</p>
+    <p><strong>Demographic:</strong> {{demographic}}</p>
+
+    <p><strong>Source Informasi:</strong> {{sourceID}}</p>
+
+    <p><strong>Source GetPost:</strong> {{source}}</p>
+
+<p><strong>Rating:</strong> {{rating}}</p>
+</div>`,
+};
+
+
+function savePreset() {
+    const formatPost = document.getElementById('formatpost').value;
+    const judulpreset = document.getElementById('judulpreset').value.trim();
+
+    if (!judulpreset) {
+        alert('Masukan Judul preset code post ini');
+        return;
+    }
+    let storage_preset = JSON.parse(localStorage.getItem('storage_preset')) || {};
+
+    storage_preset[judulpreset] = formatPost;
+    localStorage.setItem('storage_preset', JSON.stringify(storage_preset));
+
+    alert('preset berhasil disimpan!');
+    loadOpsi_preset();
+    document.getElementById('judulpreset').value = '';
+}
+
+function hapus_presetTersimpan() {
+    const preset_ON = document.getElementById('preset_ON');
+    const pilihan_preset = preset_ON.value;
+
+    if (!pilihan_preset) {
+        alert('harap pilih dahulu preset yang ingin dihapus');
+        return;
+    }
+    if (presetDefault[pilihan_preset]) {
+        alert('preset default tidak bisa dihapus');
+        return;
+    }
+    const password = prompt('masukan Password 12345 sebagai konfirmasi');
+    if (password !== '12345') {
+        alert('password salah.');
+        return;
+    }
+    let storage_preset = JSON.parse(localStorage.getItem('storage_preset')) || {};
+    delete storage_preset[pilihan_preset];
+    localStorage.setItem('storage_preset', JSON.stringify(storage_preset));
+
+    alert('preset berhasil dihapus!');
+    loadOpsi_preset();
+    document.getElementById('formatpost').value = '';
+}
+
+function loadpilihan_preset() {
+    const preset_ON = document.getElementById('preset_ON');
+    const pilihan_preset = preset_ON.value;
+    if (!pilihan_preset) {
+        document.getElementById('formatpost').value = '';
+        return;
+    }
+    const storage_preset = { ...presetDefault, ...loadstorage_preset() };
+    document.getElementById('formatpost').value = storage_preset[pilihan_preset] || '';
+    localStorage.setItem('lastpilihan_preset', pilihan_preset);
+    return storage_preset[pilihan_preset];
+}
+
+function loadOpsi_preset() {
+    const preset_ON = document.getElementById('preset_ON');
+    preset_ON.innerHTML = '';
+    const storage_preset = { ...presetDefault, ...loadstorage_preset() };
+    for (const judulpreset in storage_preset) {
+        const option = document.createElement('option');
+        option.value = judulpreset;
+        option.textContent = judulpreset;
+        preset_ON.appendChild(option);
+    }
+    loadLastpilihan_preset();
+}
+
+function loadstorage_preset() {
+    return JSON.parse(localStorage.getItem('storage_preset')) || {};
+}
+function loadLastpilihan_preset() {
+    const lastpilihan_preset = localStorage.getItem('lastpilihan_preset');
+    const preset_ON = document.getElementById('preset_ON');
+
+    if (lastpilihan_preset && preset_ON.querySelector(`option[value="${lastpilihan_preset}"]`)) {
+        preset_ON.value = lastpilihan_preset;
+        loadpilihan_preset();
+    }
+}
+
+function display_inforSeries(data) {
+        const format = loadpilihan_preset();
+        let postContent;
+
+        if (data.source === 'Jikan') {
+           postContent = format
      .replace(/{{title}}/g, data.title || 'Unknown')
      .replace(/{{titleRomaji}}/g, data.titleAlternatif.romaji || 'Unknown')
      .replace(/{{titleJapanese}}/g, data.titleAlternatif.japanese || 'Unknown')
@@ -41,8 +215,9 @@ function display_inforSeries(data) {
 .replace(/{{licensors}}/g, data.licensors || 'N/A')
       
 .replace(/{{rating}}/g, data.rating || 'N/A')          
-  } else if (data.source === 'AniList') {
-    postContent = format
+ 
+        } else if (data.source === 'AniList') {
+        postContent = format
     .replace(/{{title}}/g, data.title.romaji || data.title.english)
       .replace(/{{titleRomaji}}/g, data.title.romaji || 'Unknown')
       .replace(/{{titleEnglish}}/g, data.title.english || 'Unknown')
@@ -73,58 +248,54 @@ function display_inforSeries(data) {
               <p><strong>Character:</strong> ${character.name}</p>
           </div>
       `).join('') || 'N/A');
-  } else {
-    postContent = 'Sumber tidak ada.';
-  }
-  document.getElementById('post-result').innerHTML = postContent;
 
- if(data.source === 'AniList'){
-   document.getElementById('blogger-title').value = data.title.romaji ? data.title.romaji : data.title.english;
-  }else{
-   document.getElementById('blogger-title').value = data.title ? data.title : 'error';
-
-}
-
-  document.getElementById('blogger-labels').value = Array.isArray(data.genres) ? data.genres.join(', ') : '';
-  document.getElementById('blogger-content').value = postContent;
-}
-
- async function GetPost() {
-   const source_dataAnime_FectURL = document.getElementById('source_dataAnime_FectURL').value;
-   const id = document.getElementById('id-input').value;
-
-            if (!id) {
-                alert('Masukan ID Terlebih dahulu');
-                return;
-            }
-            
-            await mainAnime(id, source_dataAnime_FectURL, display_inforSeries);
+        } else {
+            postContent = 'Sumber tidak ada.';
         }
 
-        document.getElementById('svbutton').addEventListener('click', () => {
-            const format = document.getElementById('formatpost').value;
-            saveFormat(format);
-            alert('Format post tersimpan!');
-        });
-        window.onload = () => {
-            const savedFormat = loadFormat();
-            document.getElementById('formatpost').value = savedFormat;
-        };
+        document.getElementById('post-result').innerHTML = postContent;
+
+        if (data.source === 'AniList') {
+            document.getElementById('blogger-title').value = data.title.romaji ? data.title.romaji : data.title.english;
+        } else {
+            document.getElementById('blogger-title').value = data.title ? data.title : 'error';
+        }
+
+        document.getElementById('blogger-labels').value = Array.isArray(data.genres) ? data.genres.join(', ') : '';
+        document.getElementById('blogger-content').value = postContent;
+    }
+
+async function GetPost() {
+    const source_dataAnime_FectURL = document.getElementById('source_dataAnime_FectURL').value;
+    const id = document.getElementById('id-input').value;
+    if (!id) {
+        alert('Masukan ID Terlebih dahulu');
+        return;  }
+    await mainAnime(id, source_dataAnime_FectURL, display_inforSeries);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadOpsi_preset();
+    setupTabs();
+    document.getElementById('preset_ON').addEventListener('change', loadpilihan_preset);
+    document.getElementById('svbutton').addEventListener('click', savePreset);
+    document.getElementById('hapus_presetTersimpan').addEventListener('click', hapus_presetTersimpan);
+
+    const savedFormat = loadpilihan_preset();
+    document.getElementById('formatpost').value = savedFormat;
+});
 
 function setupTabs() {
-  const tabs = document.querySelectorAll('.tab');
-  const contents = document.querySelectorAll('.tab-content');
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
 
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      contents.forEach(c => c.style.display = 'none');
-      
-      tab.classList.add('active');
-      contents[index].style.display = 'block';
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.style.display = 'none');
+
+            tab.classList.add('active');
+            contents[index].style.display = 'block';
+        });
     });
-  });
 }
-document.addEventListener('DOMContentLoaded', () => {
-  setupTabs();
-});
