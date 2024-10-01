@@ -42,9 +42,7 @@
     </style>
 </head>
 <body>
-  
-  
-  <!--
+<!--
 Anilist 
 
 <div class="anime-info">
@@ -338,19 +336,34 @@ Jikan
     </div>
 
     <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">5. Dapatkah Aku Mengubah Format Postingan Setelah Menyimpannya?</h3>
+        <h3 class="faq-question" onclick="toggleFAQ(this)">5. Bisakah Mengubah Format Postingan Setelah Menyimpannya?</h3>
         <div class="faq-answer">
-            <p>Ya, Kamu dapat mengubah format postingan kapan saja. Cukup masukkan format baru di textarea dan simpan lagi. Format baru akan menggantikan yang lama.</p>
+            <p>Ya, Kamu dapat mengubah format postingan kapan saja. Cukup masukkan format baru di textarea dan simpan lagi dengan judul yang sama. Format baru akan menggantikan yang lama.</p>
         </div>
     </div>
 
     <div class="faq-item">
         <h3 class="faq-question" onclick="toggleFAQ(this)">6. Bagaimana Jika Aku Ingin Menghapus Format yang Disimpan?</h3>
         <div class="faq-answer">
-            <p>Untuk menghapus format yang disimpan, Kamu dapat membuka developer console di browser dan menjalankan perintah berikut:</p>
-            <pre><code>localStorage.removeItem('postFormat');</code></pre>
-            <p>Ini akan menghapus format yang disimpan dari localStorage.</p>
-            <b>Atau kamu bisa melakukan clear localstroage dari browsernya langsung</b>
+            <p>Untuk menghapus format yang disimpan, Kamu dapat memilih format mana akan dihapus terlebih dahulu, setelah memilih maka click tombol hapus yg tersedia
+        </div>
+    </div>
+    
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">7. Bisakah membackup Format Postingan?</h3>
+        <div class="faq-answer">
+            <p>Ya, Kamu dapat mencadangkan format postingan kapan saja. cukup click tombol "Backup" dan tunggu beberapa Detik..file akan siap untuk didownload.</p>
+            <h3>Bagaimana Memulihkan data backup?</h3>
+            <p>Sangat Sederhana.. pertama click "pilih file" lalu cari dan pilih file hasil backup sebelumnya.. lalu click "pulihkan" hasil data backup akan kembali pulih</p>
+        </div>
+    </div>
+    
+    <div class="faq-item">
+        <h3 class="faq-question" onclick="toggleFAQ(this)">8. Kemana harus lapor jika menemukan bug?</h3>
+        <div class="faq-answer">
+            <p>Silahkan Lapor diforum https://datakodehiru.blogspot.com/p/forum.html</p>
+            <b>Atau</b>
+            https://github.com/MagicReincarnation/Generator-post-all-codepost/issues/1
         </div>
     </div>
 </div>
@@ -387,24 +400,36 @@ Jikan
 </style>
 
 <script>
-    function toggleFAQ(element) {
-        const answer = element.nextElementSibling;
+    function toggleFAQ(e) {
+        const answer = e.nextElementSibling;
         answer.style.display = answer.style.display === "block" ? "none" : "block";
     }
 </script>
 
 
+<button id="backup_preset_codepost">backup</button>
+<input type="file" id="pulihkan_preset_codepost" accept="application/json" />
+<button id="btn_pulihkan_preset_codepost">Pulihkan</button>
+
+<br/>
+<label for="preset_ON">Pilih preset:</label>
+<select id="preset_ON"></select>
+<button id="hapus_presetTersimpan">Hapus preset</button>
+<br/>
 <textarea id="formatpost" rows="10" placeholder="Code post"></textarea>
-    <button id="svbutton">Save Format post</button>
-    
-    
-    <!--<button id="loadbutton">Load Saved Format</button>-->
+
+<label for="judulpreset">Judul:</label>
+<input type="text" id="judulpreset" placeholder="Namai preset ini">
+<button id="svbutton">Save Format Post</button>
+ 
+   
+
     
     
 <div class="cc_getpost">
     <h1>GET POST</h1>
     <p>Generate blog posts data AniList, MyAnimeList</p>
-    <label for="source_dataAnime_FectURL">Select Data Source:</label>
+    <label for="source_dataAnime_FectURL">Pilih Source ID:</label>
     <select id="source_dataAnime_FectURL">
         <option value="anilist">AniList (work)</option>
         <option value="jikan">MyAnimeList (work)</option>
@@ -423,6 +448,7 @@ Jikan
 
         <div class="tab-content active" id="result-code">
          <h2>Result Code</h2>
+         <hr/>
          <textarea id="blogger-title" rows="1" placeholder="Title"></textarea>
          <textarea id="blogger-labels" rows="3" placeholder="Label"></textarea>
           <textarea id="blogger-content" rows="20" placeholder="Content"></textarea>
@@ -430,6 +456,7 @@ Jikan
         </div>
 
         <div class="tab-content" id="result-preview">   <h2>Result Preview</h2>
+        <hr/>
             <div id="post-result"></div>
         </div>
         
@@ -440,6 +467,7 @@ Jikan
  <script src="modular_v2.js"></script>
  <script src="main.js"></script>
  <script src="rendering.js"></script>
+ <script src="cadangkan.js"></script>
 <script src="https://apis.google.com/js/api.js"></script> 
 </body>
 </html>
