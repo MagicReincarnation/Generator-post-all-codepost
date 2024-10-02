@@ -1,46 +1,205 @@
 // Preset Default
 const presetDefault = {
-    DEFAULT: `Buat Baru (gak perlu diubah)`,
-    yugen: `Code post Yugen`,
-    hexanime: `Code post Hexanime`,
-   
-    anilist_demo: `<div class="anime-info">
+    DEFAULT: `Buat baru disini`,
+    
+
+Yugen_Anilist: `<!--[ Synopsis ]-->
+<div id="synopsis">
+<p>{{description}}</p>
+</div>
+
+<span><!--more--></span>
+
+<!--[ Thumbnail ]-->
+<div class="separator" style="clear: both;"><a href="{{coverImageExtraLarge}}" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" height="200" data-original-height="650" data-original-width="460" src="{{coverImageExtraLarge}}"/></a></div>
+
+<!--[ Hero Background ]-->
+<style>
+.banner {
+background-image: url("{{coverImageExtraLarge}}");
+}
+</style>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3XUJOkFXRiw?si=KfR0AfyYLoYZe-Yq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<!--[ Extra information ]-->
+<dl id="extra-info">
+<span><dt>Romaji:</dt><dd>{{titleRomaji}}</dd></span>
+<span><dt>Native:</dt><dd>{{titleJapanese}}</dd></span>
+<span><dt>Synonyms:</dt><dd>{{titleSynonyms}}</dd></span>
+<span><dt>Studios:</dt><dd>{{studios}}</dd></span>
+<span><dt>Episodes Duration:</dt><dd>{{duration}}</dd></span>
+</dl>`,
+    
+
+Yugen_MAL: `<!--[ Synopsis ]-->
+<div id="synopsis">
+<p>{{description}}</p>
+</div>
+
+<span><!--more--></span>
+
+<!--[ Thumbnail ]-->
+<div class="separator" style="clear: both;"><a href="{{coverImage}}" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" height="200" data-original-height="650" data-original-width="460" src="{{coverImage}}"/></a></div>
+
+<!--[ Hero Background ]-->
+<style>
+.banner {
+background-image: url("{{coverImage}}");
+}
+</style>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3XUJOkFXRiw?si=KfR0AfyYLoYZe-Yq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<!--[ Extra information ]-->
+<dl id="extra-info">
+<span><dt>Romaji:</dt><dd>{{titleRomaji}}</dd></span>
+<span><dt>Native:</dt><dd>{{titleJapanese}}</dd></span>
+<span><dt>Synonyms:</dt><dd>{{titleSynonyms}}</dd></span>
+<span><dt>Studios:</dt><dd>{{studios}}</dd></span>
+<span><dt>Episodes Duration:</dt><dd>{{duration}}</dd></span>
+</dl>`,
+    
+    
+    HexaNime_Anilist: `<!--[ Synopsis ]-->
+<div id="synopsis">
+ <p>{{description}}</p>
+</div>
+
+<span><!--more--></span>
+
+<!--[ Thumbnail ]-->
+<div class="separator" style="clear: both;"><a href="{{coverImageExtraLarge}}" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" height="200" data-original-height="600" data-original-width="425" src="{{coverImageExtraLarge}}"/></a></div>
+
+<!--[ Extra information ]-->
+<dl id="extra-info">
+<span><dt>Synonym:</dt><dd>{{titleSynonyms}}</dd></span>
+<span><dt>Japanese:</dt><dd>{{titleJapanese}}</dd></span>
+<span><dt>Aired:</dt><dd>{{startDate}} - {{endDate}}</dd></span>
+<span><dt>Premiered:</dt><dd>{{season}} {{seasonYear}}</dd></span>
+<span><dt>Duration:</dt><dd>{{duration}}</dd></span>
+<span><dt>Episodes:</dt><dd>{{episodes}}</dd></span>
+</dl>
+
+<!--[ Seasons ]-->
+<h2 class="title">More Seasons</h2>
+<div class="os-list" data-jumlah='10' data-label='{{title}}'></div>
+
+
+ <!--[ Episode List ]-->
+    <script>const labelListBS = '{{title}}';</scr` + `ipt>`,
+
+
+
+    HexaNime_MAL: `<!--[ Synopsis ]-->
+<div id="synopsis">
+ <p>{{description}}</p>
+</div>
+
+<span><!--more--></span>
+
+<!--[ Thumbnail ]-->
+<div class="separator" style="clear: both;"><a href="{{coverImage}}" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" height="200" data-original-height="600" data-original-width="425" src="{{coverImage}}"/></a></div>
+
+<!--[ Extra information ]-->
+<dl id="extra-info">
+<span><dt>Synonym:</dt><dd>{{titleSynonyms}}</dd></span>
+<span><dt>Japanese:</dt><dd>{{titleJapanese}}</dd></span>
+<span><dt>Aired:</dt><dd>{{aired}}</dd></span>
+<span><dt>Premiered:</dt><dd>{{premiered}}</dd></span>
+<span><dt>Duration:</dt><dd>{{duration}}</dd></span>
+<span><dt>Episodes:</dt><dd>{{episodes}}</dd></span>
+</dl>
+
+<!--[ Seasons ]-->
+<h2 class="title">More Seasons</h2>
+<div class="os-list" data-jumlah='10' data-label='{{title}}'></div>
+
+
+ <!--[ Episode List ]-->
+    <script>const labelListBS = '{{title}}';</scr` + `ipt>`,
+
+
+
+
+
+    TMDB_demo: `<div class="tmdb-item">
+  <div class="tmdb-banner">
+    <img src="{{bannerImage}}" alt="{{title}} Banner" class="banner-image">
+  </div>
+  
+  <div class="tmdb-content">
+    <div class="tmdb-cover">
+      <img src="{{coverImage}}" alt="{{title}} Cover" class="cover-image">
+    </div>
+    
+    <div class="tmdb-info">
+      <h2>{{title}}</h2>
+      <p><strong>Alternative Titles:</strong> {{alternativeTitles}}</p>
+      
+      <p class="description">{{description}}</p>
+      
+      <div class="details">
+        <p><strong>Release Date:</strong> {{releaseDate}}</p>
+        <p><strong>Popularity:</strong> {{popularity}}</p>
+        <p><strong>Average Score:</strong> {{averageScore}}</p>
+        <p><strong>Vote Count:</strong> {{voteCount}}</p>
+          <p><strong>Episodes:</strong> {{episodes}}</p>
+          <p><strong>Seasons:</strong> {{season}}</p>
+
+          <p><strong>Duration:</strong> {{duration}} minutes</p>
+          
+        <p><strong>Genres:</strong> 
+          {{genres}}
+        </p>
+        
+        <p><strong>Studios:</strong> 
+          {{studios}}
+        </p>
+       <p><strong>SourceID:</strong> 
+          {{sourceID}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>`,
+
+anilist_demo: `
+<div class="anime-info">
     <h1>{{title}}</h1>
- <div class="banner-image">
+
+    <div class="banner-image">
         <img src="{{bannerImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
     </div>
     
     <div class="cover-image">
-
-<h2> Gambar size Extra large 
-</h2>
-
-<img src="{{coverImageExtraLarge}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/>
-
-<h2> Gambar size large 
-</h2>
-      
-<img src="{{coverImageLarge}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/>
-
-<h2> Gambar size medium
-</h2>
-      
-<img src="{{coverImageMedium}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/>
-
-</div>
+        <h2>Gambar size Extra large</h2>
+        <img src="{{coverImageExtraLarge}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
+        
+        <h2>Gambar size large</h2>
+        <img src="{{coverImageLarge}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
+        
+        <h2>Gambar size medium</h2>
+        <img src="{{coverImageMedium}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
+    </div>
   
     <h2>Alternative Titles</h2>
     <p><strong>Romaji:</strong> {{titleRomaji}}</p>
     <p><strong>English:</strong> {{titleEnglish}}</p>
     <p><strong>Native:</strong> {{titleJapanese}}</p>
+    <p><strong>Synonyms:</strong> {{titleSynonyms}}</p>
 
     <h2>Description</h2>
     <p>{{description}}</p>
 
     <h2>Details</h2>
+    <p><strong>ID Mal:</strong> {{idMal}}</p>
     <p><strong>Format:</strong> {{format}}</p>
-    <p><strong>type:</strong> {{type}}</p>
+    <p><strong>Type:</strong> {{type}}</p>
     <p><strong>Episodes:</strong> {{episodes}}</p>
+    <p><strong>Duration:</strong> {{duration}}</p>
     <p><strong>Status:</strong> {{status}}</p>
     <p><strong>Start Date:</strong> {{startDate}}</p>
     <p><strong>End Date:</strong> {{endDate}}</p>
@@ -49,13 +208,25 @@ const presetDefault = {
     <p><strong>Average Score:</strong> {{averageScore}}%</p>
     <p><strong>Mean Score:</strong> {{meanScore}}%</p>
     <p><strong>Popularity:</strong> {{popularity}}</p>
-    <p><strong>Producers:</strong> {{producers}}</p>
+    <p><strong>Volumes:</strong> {{volumes}}</p> 
+    <p><strong>Chapters:</strong> {{chapters}}</p> 
+    <p><strong>Rating (Adult):</strong> {{adult}}</p> 
+    <p><strong>Country of Origin:</strong> {{countryOfOrigin}}</p>
+    <p><strong>Licensed:</strong> {{licensors}}</p>
+    <p><strong>Hashtag:</strong> {{hashtag}}</p>
+    <p><strong>Studios:</strong> {{studios}}</p> 
     <p><strong>Genres:</strong> {{genres}}</p>
     <p><strong>Source:</strong> {{source}}</p>
+    <p><strong>SourceID:</strong> {{sourceID}}</p>
+     
+    <h2>Staff</h2>
+    <div>{{staff}}</div> 
     <h2>Characters</h2>
     <div>{{characters}}</div>
-</div>`,
-
+    
+</div>
+`,
+    
    MAL_demo: `<div class="anime-info">
     <h1>{{title}}</h1>
     <div class="cover-image">
@@ -86,12 +257,11 @@ const presetDefault = {
     <p><strong>Licensors:</strong> {{licensors}}</p>
     <p><strong>Genres:</strong> {{genres}}</p>
     <p><strong>Demographic:</strong> {{demographic}}</p>
+    <p><strong>Rating:</strong> {{rating}}</p>
 
-    <p><strong>Source Informasi:</strong> {{sourceID}}</p>
+    <p><strong>Source:</strong> {{source}}</p>
 
-    <p><strong>Source GetPost:</strong> {{source}}</p>
-
-<p><strong>Rating:</strong> {{rating}}</p>
+    <p><strong>SourceID:</strong> {{sourceID}}</p>
 </div>`,
 };
 
@@ -183,7 +353,7 @@ function display_inforSeries(data) {
         const format = loadpilihan_preset();
         let postContent;
 
-        if (data.source === 'Jikan') {
+        if (data.sourceID === 'Jikan') {
            postContent = format
      .replace(/{{title}}/g, data.title || 'Unknown')
      .replace(/{{titleRomaji}}/g, data.titleAlternatif.romaji || 'Unknown')
@@ -207,71 +377,160 @@ function display_inforSeries(data) {
       .replace(/{{favorites}}/g, data.favorites || 'N/A')
       .replace(/{{studios}}/g, Array.isArray(data.studios) ? data.studios.join(', ') : 'N/A')
       .replace(/{{producers}}/g, Array.isArray(data.producers) ? data.producers.join(', ') : 'N/A')
-      .replace(/{{sourceID}}/g, data.sourceID || 'N/A')
       .replace(/{{genres}}/g, Array.isArray(data.genres) ? data.genres.join(', ') : 'N/A')      
       .replace(/{{demographic}}/g, Array.isArray(data.demographic) ? data.demographic.join(', ') : 'N/A')
       
 
 .replace(/{{licensors}}/g, data.licensors || 'N/A')
       
-.replace(/{{rating}}/g, data.rating || 'N/A')          
- 
-        } else if (data.source === 'AniList') {
+.replace(/{{rating}}/g, data.rating || 'N/A')          .replace(/{{source}}/g, data.source || 'N/A')
+ .replace(/{{sourceID}}/g, data.sourceID || 'N/A')
+        } else if (data.sourceID === 'AniList') {
         postContent = format
     .replace(/{{title}}/g, data.title.romaji || data.title.english)
-      .replace(/{{titleRomaji}}/g, data.title.romaji || 'Unknown')
-      .replace(/{{titleEnglish}}/g, data.title.english || 'Unknown')
-      .replace(/{{titleJapanese}}/g, data.title.japanese || 'Unknown')
-      .replace(/{{bannerImage}}/g, data.bannerImage || '')
-      .replace(/{{coverImageExtraLarge}}/g, data.coverImageExtraLarge || '')
-      .replace(/{{coverImageLarge}}/g, data.coverImageLarge || '')
-      .replace(/{{coverImageMedium}}/g, data.coverImageMedium || '')
+    .replace(/{{titleRomaji}}/g, data.title.romaji || 'Unknown')
+    .replace(/{{titleEnglish}}/g, data.title.english || 'Unknown')
+    .replace(/{{titleJapanese}}/g, data.title.japanese || 'Unknown')
+    .replace(/{{titleSynonyms}}/g, Array.isArray(data.title.synonyms) ? data.title.synonyms.join(', ') : 'Unknown')
+    .replace(/{{idMal}}/g, data.idMal || 'N/A') 
+    .replace(/{{bannerImage}}/g, data.bannerImage || '')
+    .replace(/{{coverImageExtraLarge}}/g, data.coverImageExtraLarge || '')
+    .replace(/{{coverImageLarge}}/g, data.coverImageLarge || '')
+    .replace(/{{coverImageMedium}}/g, data.coverImageMedium || '')
+    .replace(/{{description}}/g, data.description || 'N/A')
+    .replace(/{{type}}/g, data.type || 'N/A')
+    .replace(/{{format}}/g, data.format || 'N/A')
+    .replace(/{{episodes}}/g, data.episodes || 'N/A')
+    .replace(/{{duration}}/g, data.duration || 'N/A')
+    .replace(/{{status}}/g, data.status || 'N/A')
+    .replace(/{{startDate}}/g, data.startDate || 'N/A')
+    .replace(/{{endDate}}/g, data.endDate || 'N/A')
+    .replace(/{{season}}/g, data.season || 'N/A')
+    .replace(/{{seasonYear}}/g, data.seasonYear || 'N/A')
+    .replace(/{{averageScore}}/g, data.averageScore || 'N/A')
+    .replace(/{{meanScore}}/g, data.meanScore || 'N/A')
+    .replace(/{{popularity}}/g, data.popularity || 'N/A')
+    .replace(/{{volumes}}/g, data.volumes || 'N/A') 
+    .replace(/{{chapters}}/g, data.chapters || 'N/A')  
+    .replace(/{{adult}}/g, data.adult ? 'R-18' : 'R-14') 
+    .replace(/{{countryOfOrigin}}/g, data.countryOfOrigin || 'N/A')  
+    .replace(/{{licensors}}/g, data.isLicensed ? 'Yes' : 'No')  
+    .replace(/{{hashtag}}/g, data.hashtag || 'N/A')  
+   
+    .replace(/{{studios}}/g, Array.isArray(data.studios) ? data.studios.join(', ') : 'N/A')  
+  
+    .replace(/{{genres}}/g, Array.isArray(data.genres) ? data.genres.join(', ') : 'N/A')
+    .replace(/{{externalLinks}}/g, data.externalLinks.map(link => `
+  <div class="external-link">
+    <a href="${link.url}" target="_blank">
+      Watch on ${link.site}
+    </a>
+  </div>
+`).join('') || 'N/A')
+    .replace(/{{staff}}/g, data.staff.map(staffMember => `
+        <div class="staff">
+            <img src="${staffMember.image}" alt="${staffMember.name}" style="width: 100px; height: auto;" />
+            <p><strong>Staff:</strong> ${staffMember.name} - ${staffMember.role}</p>
+        </div>
+    `).join('') || 'N/A') 
+    .replace(/{{characters}}/g, data.characters.map(character => `
+  <div class="character">
+    <img src="${character.image}" alt="${character.name}" style="width: 100px; height: auto;" />
+    <p><strong>Character:</strong> ${character.name}</p>
+    <div class="voice-actors">
+      <h4>Voice Actors:</h4>
+      ${character.voiceActors.map(va => `
+        <div class="voice-actor">
+          <img src="${va.image}" alt="${va.name}" style="width: 80px; height: auto;" />
+          <p><strong>${va.name}</strong></p>
+          <p><strong>(${va.language})</strong></p>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+`).join('') || 'N/A')
+    .replace(/{{source}}/g, data.source || 'N/A') .replace(/{{sourceID}}/g, data.sourceID || 'N/A')  
+    } else if (data.sourceID === 'TMDB') {
+    postContent = format
+      .replace(/{{title}}/g, data.title || 'Unknown')
       .replace(/{{description}}/g, data.description || 'N/A')
-      .replace(/{{type}}/g, data.type || 'N/A')
-     .replace(/{{format}}/g, data.format || 'N/A')
+      .replace(/{{bannerImage}}/g, data.bannerImage || '')
+      .replace(/{{coverImage}}/g, data.coverImage || '')
       .replace(/{{episodes}}/g, data.episodes || 'N/A')
       .replace(/{{duration}}/g, data.duration || 'N/A')
-      .replace(/{{status}}/g, data.status || 'N/A')
-      .replace(/{{startDate}}/g, data.startDate || 'N/A')
-      .replace(/{{endDate}}/g, data.endDate || 'N/A')
-      .replace(/{{season}}/g, data.season || 'N/A')
-      .replace(/{{seasonYear}}/g, data.seasonYear || 'N/A')
       .replace(/{{averageScore}}/g, data.averageScore || 'N/A')
-      .replace(/{{meanScore}}/g, data.meanScore || 'N/A')
       .replace(/{{popularity}}/g, data.popularity || 'N/A')
-      .replace(/{{producers}}/g, Array.isArray(data.producers) ? data.producers.join(', ') : 'N/A')
-      .replace(/{{source}}/g, data.source || 'N/A')
+      .replace(/{{season}}/g, data.season || 'N/A')
+      .replace(/{{studios}}/g, Array.isArray(data.studios) ? data.studios.join(', ') : 'N/A')
       .replace(/{{genres}}/g, Array.isArray(data.genres) ? data.genres.join(', ') : 'N/A')
-      .replace(/{{characters}}/g, data.characters.map(character => `
-          <div class="character">
-              <img src="${character.image}" alt="${character.name}" style="width: 100px; height: auto;" />
-              <p><strong>Character:</strong> ${character.name}</p>
-          </div>
-      `).join('') || 'N/A');
+      .replace(/{{releaseDate}}/g, data.releaseDate || 'N/A')
+      .replace(/{{voteCount}}/g, data.voteCount || 'N/A')   
+      .replace(/{{alternativeTitles}}/g, data.alternativeTitles || 'N/A') 
+      .replace(/{{sourceID}}/g, data.sourceID || 'N/A');
+      
+     } else if (data.sourceID === 'IMDB') {
+    postContent = format
+      .replace(/{{title}}/g, data.title || 'Unknown')
+      .replace(/{{description}}/g, data.description || 'N/A')
+      .replace(/{{coverImage}}/g, data.coverImage || '')
+      .replace(/{{episodes}}/g, data.episodes || 'N/A')
+      
+      .replace(/{{duration}}/g, data.duration || 'N/A')
+      .replace(/{{averageScore}}/g, data.averageScore || 'N/A')
+      .replace(/{{popularity}}/g, data.popularity || 'N/A')
+      
+      .replace(/{{studios}}/g, Array.isArray(data.studios) ? data.studios.join(', ') : 'N/A')
+      .replace(/{{genres}}/g, Array.isArray(data.genres) ? data.genres.join(', ') : 'N/A')
+      .replace(/{{sourceID}}/g, data.sourceID || 'N/A')
 
-        } else {
+         } else {
             postContent = 'Sumber tidak ada.';
         }
 
         document.getElementById('post-result').innerHTML = postContent;
 
-        if (data.source === 'AniList') {
-            document.getElementById('blogger-title').value = data.title.romaji ? data.title.romaji : data.title.english;
+        if (data.sourceID === 'AniList') {
+      document.getElementById('blogger-title').value = data.title.romaji ? data.title.romaji : data.title.english;
         } else {
-            document.getElementById('blogger-title').value = data.title ? data.title : 'error';
+      document.getElementById('blogger-title').value = data.title ? data.title : 'error';
         }
 
         document.getElementById('blogger-labels').value = Array.isArray(data.genres) ? data.genres.join(', ') : '';
         document.getElementById('blogger-content').value = postContent;
     }
 
+
+const typeOption= {
+    anilist: ['ANIME', 'MANGA'],
+    jikan: ['anime', 'manga'],
+    tmdb: ['tv', 'movie'],
+};
+
+function run_typeOption() {
+    const pilih_source = document.getElementById('source_dataAnime_FectURL');
+    const pilih_type = document.getElementById('type_dataAnime_FectURL');
+    const source_ON = pilih_source.value;
+    pilih_type.innerHTML = '';
+    const option_list = typeOption[source_ON];
+    option_list.forEach(type => {
+        const option_tag = document.createElement('option');
+        option_tag.value = type; 
+        option_tag.textContent = type;
+        pilih_type.appendChild(option_tag);
+    });
+}
+document.getElementById('source_dataAnime_FectURL').addEventListener('change', run_typeOption);
+run_typeOption();
 async function GetPost() {
     const source_dataAnime_FectURL = document.getElementById('source_dataAnime_FectURL').value;
+    const type_dataAnime_FectURL = document.getElementById('type_dataAnime_FectURL').value;
     const id = document.getElementById('id-input').value;
+    
     if (!id) {
         alert('Masukan ID Terlebih dahulu');
-        return;  }
-    await mainAnime(id, source_dataAnime_FectURL, display_inforSeries);
+        return;
+    }
+ await mainAnime(id, source_dataAnime_FectURL, type_dataAnime_FectURL, display_inforSeries);
 }
 
 
