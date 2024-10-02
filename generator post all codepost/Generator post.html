@@ -42,90 +42,6 @@
     </style>
 </head>
 <body>
-<!--
-Anilist 
-
-<div class="anime-info">
-    <h1>{{titleRomaji}}</h1>
-
- <div class="banner-image">
-        <img src="{{bannerImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
-    </div>
-    
-    <div class="cover-image">
-        <img src="{{coverImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;"/></div>
-        
-    <h2>Alternative Titles</h2>
-    <p><strong>Romaji:</strong> {{titleRomaji}}</p>
-    <p><strong>English:</strong> {{titleEnglish}}</p>
-    <p><strong>Japanese:</strong> {{titleJapanese}}</p>
-
-    <h2>Description</h2>
-    <p>{{description}}</p>
-
-    <h2>Details</h2>
-    <p><strong>Format:</strong> {{format}}</p>
-    <p><strong>type:</strong> {{type}}</p>
-    <p><strong>Episodes:</strong> {{episodes}}</p>
-    <p><strong>Status:</strong> {{status}}</p>
-    <p><strong>Start Date:</strong> {{startDate}}</p>
-    <p><strong>End Date:</strong> {{endDate}}</p>
-    <p><strong>Season:</strong> {{season}}</p>
-    <p><strong>Season Year:</strong> {{seasonYear}}</p>
-    <p><strong>Average Score:</strong> {{averageScore}}%</p>
-    <p><strong>Mean Score:</strong> {{meanScore}}%</p>
-    <p><strong>Popularity:</strong> {{popularity}}</p>
-    <p><strong>Producers:</strong> {{producers}}</p>
-    <p><strong>Source:</strong> {{source}}</p>
-    <p><strong>Genres:</strong> {{genres}}</p>
-
-    <h2>Characters & Voice Actors</h2>
-    <div>{{characters}}</div>
-</div>
-
-
-Jikan 
-
-<div class="anime-info">
-    <h1>{{title}}</h1>
-    <div class="cover-image">
-        <img src="{{coverImage}}" alt="{{title}} Cover" style="width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;" />
-    </div>
-
-    <h2>Alternative Titles</h2>
-    <p><strong>Romaji:</strong> {{titleRomaji}}</p>
-    <p><strong>English:</strong> {{titleEnglish}}</p>
-    <p><strong>Japanese:</strong> {{titleJapanese}}</p>
-
-
-    <h2>Description</h2>
-    <p>{{description}}</p>
-
-    <h2>Details</h2>
-    <p><strong>Type:</strong> {{type}}</p>
-    <p><strong>Episodes:</strong> {{episodes}}</p>
-    <p><strong>Episode Duration:</strong> {{duration}}</p>
-    <p><strong>Status:</strong> {{status}}</p>
-    <p><strong>Aired:</strong> {{aired}}</p>
-    <p><strong>Premiered:</strong> {{premiered}}</p>
-    <p><strong>Broadcast:</strong> {{broadcast}}</p>
-    <p><strong>Average Score:</strong> {{averageScore}}</p>
-    <p><strong>Popularity:</strong> {{popularity}}</p>
-    <p><strong>Studios:</strong> {{studios}}</p>
-    <p><strong>Producers:</strong> {{producers}}</p>
-    <p><strong>Licensors:</strong> {{licensors}}</p>
-    <p><strong>Genres:</strong> {{genres}}</p>
-    <p><strong>Demographic:</strong> {{demographic}}</p>
-
-    <p><strong>Source Informasi:</strong> {{sourceID}}</p>
-
-    <p><strong>Source GetPost:</strong> {{source}}</p>
-
-<p><strong>Rating:</strong> {{rating}}</p>
-</div>
-
--->
-  
   <div class="faq-section">
     <h2>FAQ: README</h2>    
     <div class="faq-item">
@@ -182,49 +98,56 @@ Jikan
     <li><strong>{{averageScore}}:</strong> Skor rata-rata dari penilaian pengguna, dalam persen.</li>
     <li><strong>{{meanScore}}:</strong> Skor rata-rata keseluruhan dari semua penilaian, dalam persen.</li>
     <li><strong>{{popularity}}:</strong> Popularitas anime berdasarkan jumlah penggemar atau peringkat.</li>
-    <li><strong>{{producers}}:</strong> Nama-nama produser yang terlibat dalam pembuatan anime.</li>
-    <li><strong>{{genres}}:</strong> Genre atau jenis cerita anime (misalnya: Action, Comedy, Drama).</li>
-    <li><strong>{{source}}:</strong> Sumber cerita anime (misalnya: Manga, Novel, Original).</li>
+    <li><strong>{{studios}}:</strong> Nama-nama studios yang terlibat dalam pembuatan anime.</li>
+    <li><strong>{{genres}}:</strong> Genre anime (misalnya: Action, Comedy, Drama).</li>
+    
+     <li><strong>{{countryOfOrigin}}:</strong> Negara produksi anime.</li>
+     <li><strong>{{adult}}:</strong> Tag R-18/R-14.</li>
+     
+     <li><strong>{{licensors}}:</strong> Tag YES/NO</li>
+     <li><strong>{{chapters}}:</strong> Chapter (Manga)</li>
+     <li><strong>{{volumes}}:</strong> volumes (Manga)</li>
+     <li><strong>{{hashtag}}:</strong> hashtag anime.</li>
+     
+    <li><strong>{{source}}:</strong> Sumber data atau cerita asli anime (misalnya: Manga, Novel, Original).</li>
+    <li><strong>{{sourceID}}:</strong> ID sumber informasi anime (misalnya: ID pada database seperti MyAnimeList atau Anilist).</li>
+    <li><strong>{{staff}}:</strong> Daftar staff yg terlibat produksi anime.</li>
+    <li><strong>{{characters}}:</strong> Daftar characters dan voice actors (VA) Jepang.</li>
 </ul>
 <pre><code>
 &lt;div class=&quot;anime-info&quot;&gt;
     &lt;h1&gt;{{title}}&lt;/h1&gt;
 
- &lt;div class=&quot;banner-image&quot;&gt;
+    &lt;div class=&quot;banner-image&quot;&gt;
         &lt;img src=&quot;{{bannerImage}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
     &lt;/div&gt;
     
     &lt;div class=&quot;cover-image&quot;&gt;
-
-&lt;h2&gt; Gambar size Extra large 
-&lt;/h2&gt;
-
-&lt;img src=&quot;{{coverImageExtraLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot;/&gt;
-
-&lt;h2&gt; Gambar size large 
-&lt;/h2&gt;
-      
-&lt;img src=&quot;{{coverImageLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot;/&gt;
-
-&lt;h2&gt; Gambar size medium
-&lt;/h2&gt;
-      
-&lt;img src=&quot;{{coverImageMedium}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot;/&gt;
-
-&lt;/div&gt;
+        &lt;h2&gt;Gambar size Extra large&lt;/h2&gt;
+        &lt;img src=&quot;{{coverImageExtraLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
+        
+        &lt;h2&gt;Gambar size large&lt;/h2&gt;
+        &lt;img src=&quot;{{coverImageLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
+        
+        &lt;h2&gt;Gambar size medium&lt;/h2&gt;
+        &lt;img src=&quot;{{coverImageMedium}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
+    &lt;/div&gt;
   
     &lt;h2&gt;Alternative Titles&lt;/h2&gt;
     &lt;p&gt;&lt;strong&gt;Romaji:&lt;/strong&gt; {{titleRomaji}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;English:&lt;/strong&gt; {{titleEnglish}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Native:&lt;/strong&gt; {{titleJapanese}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Synonyms:&lt;/strong&gt; {{titleSynonyms}}&lt;/p&gt;
 
     &lt;h2&gt;Description&lt;/h2&gt;
     &lt;p&gt;{{description}}&lt;/p&gt;
 
     &lt;h2&gt;Details&lt;/h2&gt;
+    &lt;p&gt;&lt;strong&gt;ID Mal:&lt;/strong&gt; {{idMal}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Format:&lt;/strong&gt; {{format}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;type:&lt;/strong&gt; {{type}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Type:&lt;/strong&gt; {{type}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Episodes:&lt;/strong&gt; {{episodes}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Duration:&lt;/strong&gt; {{duration}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; {{status}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Start Date:&lt;/strong&gt; {{startDate}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;End Date:&lt;/strong&gt; {{endDate}}&lt;/p&gt;
@@ -233,11 +156,21 @@ Jikan
     &lt;p&gt;&lt;strong&gt;Average Score:&lt;/strong&gt; {{averageScore}}%&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Mean Score:&lt;/strong&gt; {{meanScore}}%&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Popularity:&lt;/strong&gt; {{popularity}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Producers:&lt;/strong&gt; {{producers}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Volumes:&lt;/strong&gt; {{volumes}}&lt;/p&gt; 
+    &lt;p&gt;&lt;strong&gt;Chapters:&lt;/strong&gt; {{chapters}}&lt;/p&gt; 
+    &lt;p&gt;&lt;strong&gt;Is Adult:&lt;/strong&gt; {{adult}}&lt;/p&gt; 
+    &lt;p&gt;&lt;strong&gt;Country of Origin:&lt;/strong&gt; {{countryOfOrigin}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Is Licensed:&lt;/strong&gt; {{isLicensed}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Hashtag:&lt;/strong&gt; {{hashtag}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Studios:&lt;/strong&gt; {{studios}}&lt;/p&gt; 
     &lt;p&gt;&lt;strong&gt;Genres:&lt;/strong&gt; {{genres}}&lt;/p&gt;
     &lt;p&gt;&lt;strong&gt;Source:&lt;/strong&gt; {{source}}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;SourceID:&lt;/strong&gt; {{sourceID}}&lt;/p&gt;
+    &lt;h2&gt;Staff&lt;/h2&gt;
+    &lt;div&gt;{{staff}}&lt;/div&gt; 
     &lt;h2&gt;Characters&lt;/h2&gt;
     &lt;div&gt;{{characters}}&lt;/div&gt;
+    
 &lt;/div&gt;
 </code></pre>
 
@@ -270,9 +203,9 @@ Jikan
 
     <li><strong>{{genres}}:</strong> Genre atau kategori utama anime (misalnya: Action, Comedy, Drama).</li>
     <li><strong>{{demographic}}:</strong> Target penonton berdasarkan demografi (misalnya: Shounen, Seinen).</li>
-
-    <li><strong>{{sourceID}}:</strong> ID sumber informasi anime (misalnya: ID pada database seperti MyAnimeList atau Anilist).</li>
+   
     <li><strong>{{source}}:</strong> Sumber data atau cerita asli anime (misalnya: Manga, Novel, Original).</li>
+    <li><strong>{{sourceID}}:</strong> ID sumber informasi anime (misalnya: ID pada database seperti MyAnimeList atau Anilist).</li>
 
     <li><strong>{{rating}}:</strong> Klasifikasi usia atau rating anime (misalnya: PG-13, R-17).</li>
 </ul>
@@ -421,20 +354,22 @@ Jikan
 <label for="judulpreset">Judul:</label>
 <input type="text" id="judulpreset" placeholder="Namai preset ini">
 <button id="svbutton">Save Format Post</button>
- 
-   
-
-    
-    
+  
 <div class="cc_getpost">
     <h1>GET POST</h1>
     <p>Generate blog posts data AniList, MyAnimeList</p>
     <label for="source_dataAnime_FectURL">Pilih Source ID:</label>
     <select id="source_dataAnime_FectURL">
-        <option value="anilist">AniList (work)</option>
-        <option value="jikan">MyAnimeList (work)</option>
+        <option value="anilist">AniList (✅)</option>
+        <option value="jikan">MyAnimeList (✅)</option>
+        <option value="tmdb">TMDB (✅)</option>
+        <option value="imdb">IMDB (❌)</option>
     </select>
-
+        <label for="type_dataAnime_FectURL">Pilih type:</label>
+    <select id="type_dataAnime_FectURL">
+        
+    </select>
+    
     <label for="id-input">Enter ID:</label>
     <input value="162804" type="text" id="id-input" placeholder="Enter ID from selected platform">
 
@@ -449,7 +384,7 @@ Jikan
         <div class="tab-content active" id="result-code">
          <h2>Result Code</h2>
          <hr/>
-         <textarea id="blogger-title" rows="1" placeholder="Title"></textarea>
+         <textarea id="blogger-title" rows="2" placeholder="Title"></textarea>
          <textarea id="blogger-labels" rows="3" placeholder="Label"></textarea>
           <textarea id="blogger-content" rows="20" placeholder="Content"></textarea>
          <button id="post-button">Post to Blogger</button>
@@ -463,8 +398,17 @@ Jikan
     </div>
 </div>
 
- 
- <script src="modular_v2.js"></script>
+ <script>
+  configAPIKey = {
+  blogger:{
+    blogId:"",
+    apiKey:"",
+  },
+  TMDB:"",
+  IMDB:"",//belum selesai dikerjakan
+    } 
+   </script>
+ <script src="modular_v3.js"></script>
  <script src="main.js"></script>
  <script src="rendering.js"></script>
 <script src="https://apis.google.com/js/api.js"></script> 
