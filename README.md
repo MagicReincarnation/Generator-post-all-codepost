@@ -41,6 +41,7 @@ generator post flexsibel
 2.MAL [ANIME & MANGA]
 3.TMDB [TV & MOVIE]
 ```
+4. Menghapus spasi pada input labels
 
 ### Credit 
 1. Roka (anilist & MAL)
