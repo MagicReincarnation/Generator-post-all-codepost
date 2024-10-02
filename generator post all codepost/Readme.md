@@ -35,3 +35,4 @@
 2.MAL [ANIME & MANGA]
 3.TMDB [TV & MOVIE]
 ```
+4. Menghapus spasi pada input labels
