@@ -1,7 +1,7 @@
 // function memposting ke Blogger
 async function postToBlogger(title, labels, content) {
-  const blogId = ''; // ID Blog
-  const apiKey = ''; // API Key Blogger
+  const blogId = configAPIKey.blogger.blogId; // ID Blog
+  const apiKey = configAPIKey.blogger.apiKey; // API Key Blogger
   
 if (blogId && apiKey){
   const post = {
@@ -32,6 +32,7 @@ if (blogId && apiKey){
 alert('IdBlog dan API belum dipasang');
   }
 }
+
 document.getElementById('post-button').addEventListener('click', () => {
   const title = document.getElementById('blogger-title').value;
   const labels = document.getElementById('blogger-labels').value;
@@ -39,6 +40,3 @@ document.getElementById('post-button').addEventListener('click', () => {
 
   postToBlogger(title, labels, content);
 });
-
-
-
