@@ -495,7 +495,7 @@ function display_inforSeries(data) {
       document.getElementById('blogger-title').value = data.title ? data.title : 'error';
         }
 
-        document.getElementById('blogger-labels').value = Array.isArray(data.genres) ? data.genres.join(', ') : '';
+        document.getElementById('blogger-labels').value = Array.isArray(data.genres) ? data.genres.join(',') : '';
         document.getElementById('blogger-content').value = postContent;
     }
 
