@@ -4,8 +4,13 @@ generator post flexsibel
 
 ### [demo video](https://www.youtube.com/embed/EcX1-bNo_a0)
 
-### Version 2.2 - 01 Okt,2024
+### Version 2.1 - 01 Okt,2024
 1. Menambahkan Fitur *[ preset, backup, pulihkan backup ]*
+
+### Version 2.2 - 01 Okt,2024
+1. Memperbaiki stuktur Fitur *[preset, backup, pulihkan backup]*
+2. merubah data [production jadi studios, prebuild preset {yugen, hexanime, anilist_demo, MAL_demo,} ,Array type ID].
+
 ### Version 2.3 - 02 Okt, 2024
 1. Menambahkan TMDB
 2. Menambahkan DATA baru
