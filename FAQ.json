@@ -1,0 +1,127 @@
+{
+  "faq": [
+    {
+      "id": 1,
+      "question": "Apa itu Format Postingan?",
+      "answer": "Format postingan adalah Code Post yang dapat kamu buat untuk menampilkan data anime. kamu dapat menggunakan {{data}} (yang diambil dari API.) untuk mengisi data code post kamu."
+    },
+    {
+      "id": 2,
+      "question": "Data Apa yang Tersedia?",
+      "answer": [
+        "{{title}}: Judul anime.",
+        "{{description}}: Deskripsi anime.",
+        "{{bannerImage}}: URL gambar banner anime.",
+        "{{coverImage}}: URL gambar cover anime.",
+        "{{studios}}: Daftar studio yang memproduksi anime.",
+        "{{genres}}: Daftar genre anime.",
+        "{{episodes}}: Jumlah episode anime.",
+        "{{duration}}: Durasi per episode anime.",
+        "{{popularity}}: Popularitas anime (nilai numerik).",
+        "{{averageScore}}: Rata-rata skor anime (nilai numerik).",
+        "{{characters}}: Daftar karakter anime, termasuk gambar dan nama mereka."
+      ],
+      "note": "Lebih lengkap silahkan cek contohnya di FAQ 'Contoh Format Postingan'."
+    },
+    {
+      "id": 3,
+      "question": "Contoh Format Postingan",
+      "answer": {
+        "anilist": [
+          "{{title}}: Judul utama anime.",
+          "{{bannerImage}}: URL gambar banner dari anime.",
+          "{{coverImageExtraLarge}}: URL gambar cover ukuran extra besar dari anime.",
+          "{{coverImageLarge}}: URL gambar cover ukuran besar dari anime.",
+          "{{coverImageMedium}}: URL gambar cover ukuran medium dari anime.",
+          "{{titleRomaji}}: Judul anime dalam Romaji.",
+          "{{titleEnglish}}: Judul anime dalam bahasa Inggris.",
+          "{{titleJapanese}}: Judul anime dalam bahasa Jepang.",
+          "{{titleSynonyms}}: Sinonim atau judul alternatif lainnya.",
+          "{{description}}: Deskripsi atau sinopsis dari anime.",
+          "{{format}}: Format anime (TV, Movie, OVA).",
+          "{{type}}: Jenis anime (serial atau film).",
+          "{{episodes}}: Jumlah total episode anime.",
+          "{{status}}: Status anime (Finished, Ongoing).",
+          "{{startDate}}: Tanggal mulai penayangan anime.",
+          "{{endDate}}: Tanggal akhir penayangan anime.",
+          "{{season}}: Musim penayangan anime.",
+          "{{seasonYear}}: Tahun penayangan anime.",
+          "{{averageScore}}: Skor rata-rata pengguna.",
+          "{{meanScore}}: Skor rata-rata keseluruhan.",
+          "{{popularity}}: Popularitas anime.",
+          "{{studios}}: Nama studio yang terlibat.",
+          "{{genres}}: Genre anime.",
+          "{{countryOfOrigin}}: Negara produksi anime.",
+          "{{adult}}: Tag R-18/R-14.",
+          "{{licensors}}: Tag YES/NO.",
+          "{{chapters}}: Chapter (Manga).",
+          "{{volumes}}: Volumes (Manga).",
+          "{{hashtag}}: Hashtag anime.",
+          "{{idMal}}: ID Anime di MAL.",
+          "{{source}}: Sumber data anime.",
+          "{{sourceID}}: ID sumber informasi anime.",
+          "{{staff}}: Daftar staff produksi.",
+          "{{characters}}: Daftar characters dan voice actors."
+        ],
+        "mal": [
+          "{{title}}: Judul utama anime.",
+          "{{coverImage}}: URL gambar cover dari anime.",
+          "{{titleRomaji}}: Judul anime dalam Romaji.",
+          "{{titleEnglish}}: Judul anime dalam bahasa Inggris.",
+          "{{titleJapanese}}: Judul anime dalam bahasa Jepang.",
+          "{{titleSynonyms}}: Sinonim atau judul alternatif.",
+          "{{description}}: Deskripsi atau sinopsis anime.",
+          "{{type}}: Jenis anime (TV, Movie, OVA).",
+          "{{episodes}}: Jumlah total episode anime.",
+          "{{duration}}: Durasi rata-rata tiap episode.",
+          "{{status}}: Status anime (Finished, Ongoing).",
+          "{{aired}}: Rentang tanggal penayangan.",
+          "{{premiered}}: Musim dan tahun pertama tayang.",
+          "{{broadcast}}: Waktu siaran anime.",
+          "{{averageScore}}: Skor rata-rata pengguna.",
+          "{{popularity}}: Popularitas anime.",
+          "{{studios}}: Studio animasi yang memproduksi anime.",
+          "{{producers}}: Perusahaan produser anime.",
+          "{{licensors}}: Perusahaan lisensi distribusi anime.",
+          "{{genres}}: Genre atau kategori anime.",
+          "{{demographic}}: Target penonton berdasarkan demografi.",
+          "{{source}}: Sumber cerita anime.",
+          "{{sourceID}}: ID sumber informasi anime.",
+          "{{rating}}: Klasifikasi usia atau rating anime."
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "question": "Bagaimana Cara Menggunakan Generator Post ini?",
+      "answer": [
+        "Langkah 1: Tulis format postingan di textarea yang disediakan.",
+        "Langkah 2: Gunakan {{data}} sesuai dengan data yang ingin ditampilkan.",
+        "Langkah 3: Klik tombol 'Save Format post' untuk menyimpan format ke localStorage.",
+        "Langkah 4: Pilih Sumber ID Anime yang akan kamu gunakan.",
+        "Langkah 5: Masukan ID Anime ke input 'ENTER ID' dan klik 'GetPost'.",
+        "Langkah 6: Cek data yang didapat, jika sudah benar copy dan paste ke blog."
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Bisakah Mengubah Format Postingan Setelah Menyimpannya?",
+      "answer": "Ya, Kamu dapat mengubah format postingan kapan saja. Cukup masukkan format baru di textarea dan simpan lagi dengan judul yang sama. Format baru akan menggantikan yang lama."
+    },
+    {
+      "id": 6,
+      "question": "Bagaimana Jika Aku Ingin Menghapus Format yang Disimpan?",
+      "answer": "Untuk menghapus format yang disimpan, Kamu dapat memilih format mana yang akan dihapus terlebih dahulu, setelah memilih klik tombol hapus yang tersedia."
+    },
+    {
+      "id": 7,
+      "question": "Bisakah Membackup Format Postingan?",
+      "answer": "Ya, Kamu dapat mencadangkan format postingan kapan saja. Cukup klik tombol 'Backup' dan tunggu beberapa detik hingga file siap di-download. Untuk memulihkan data, klik 'pilih file' dan pilih file backup, lalu klik 'pulihkan'."
+    },
+    {
+      "id": 8,
+      "question": "Kemana Harus Lapor Jika Menemukan Bug?",
+      "answer": "Silahkan lapor di forum https://datakodehiru.blogspot.com/p/forum.html atau melalui https://github.com/MagicReincarnation/Generator-post-all-codepost/issues/1."
+    }
+  ]
+}
