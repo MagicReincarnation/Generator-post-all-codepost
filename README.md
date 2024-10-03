@@ -1,8 +1,32 @@
 # Generator-post-all-codepost
-generator post flexsibel
-## [demo test](https://codehiru.blogspot.com/2024/09/generator-post-all-codepost.html?m=1)
+  **sebuah tools generator post flexsibel**
+  
+  kamu bisa memanfaatkan tools post ini agar bisa memudahkan kamu memposting dengan code format post milik kamu sendiri,
+ untuk data post akan diisi secara otomatis pakai API Anilist, MAL, TMDB, cukup panggail saja {{data}}
+ 
+ - **contoh**
+   codepost ini 
+   ```
+   <h2>{{titleRomaji}}</h2>
+   ```
+   akan menghasilkan ouput
+   judul series dalam bentuk romaji
+   
 
-### [demo video](https://www.youtube.com/embed/EcX1-bNo_a0)
+# Web Demo tester
+- link [demo test](https://codehiru.blogspot.com/2024/09/generator-post-all-codepost.html?m=1)
+# video demo tester 
+- link [demo video](https://www.youtube.com/embed/EcX1-bNo_a0)
+
+# Setup post generator (Untuk v2.4)
+
+0.**dapatkan cliendID auth2.0**
+   
+   lakukan dua hal ini
+   - tonton video [Setup post generate (anilist,MAL) blogger](https://youtu.be/K8tYt5GsVwk?si=wyH_lX1ZO9tfAPTF)
+   - sambil masuk ke [cloudGoogle](https://console.cloud.google.com/)
+  
+ikuti aja setiap intruksi yang ada divideo.
 
 ### Version 2.1 - 01 Okt,2024
 1. Menambahkan Fitur *[ preset, backup, pulihkan backup ]*
