@@ -4,348 +4,232 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post Generator</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
   <style>
-  .cc_getpost {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        .tab {
-            flex: 1;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border: 1px solid #ccc;
-            text-align: center;
-            cursor: pointer;
-        }
-        .tab.active {
-            background-color: #e0e0e0;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        textarea {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 5px;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+.cc_postgenerator h1 {
+    color: #3a5a40;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.cc_postgenerator label {
+    font-weight: bold;
+    color: #3a5a40;
+}
+
+.cc_postgenerator input[type="text"], 
+.cc_postgenerator textarea, 
+.cc_postgenerator select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0 15px;
+    background-color: #eef3f7;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.cc_postgenerator input[type="text"]:focus, 
+.cc_postgenerator textarea:focus, 
+.cc_postgenerator select:focus {
+    border-color: #3a5a40;
+}
+
+.cc_postgenerator button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3a5a40;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cc_postgenerator button:hover {
+    background-color: #4d725a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cc_postgenerator button:active {
+    background-color: #2f4931;
+}
+
+button#backup_preset_codepost::before, 
+button#btn_pulihkan_preset_codepost::before, 
+button#hapus_presetTersimpan::before, 
+button#svbutton::before, 
+button#save-config-button::before, 
+button#post-button::before {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900;
+    margin-right: 8px;
+}
+
+button#backup_preset_codepost::before {
+    content: "\f1c0"; /* Icon backup */
+}
+
+button#btn_pulihkan_preset_codepost::before {
+    content: "\f0e2"; /* Icon restore */
+}
+
+button#hapus_presetTersimpan::before {
+    content: "\f2ed"; /* Icon delete */
+}
+
+button#svbutton::before {
+    content: "\f0c7"; /* Icon save */
+}
+
+button#save-config-button::before {
+    content: "\f0a0"; /* Icon config */
+}
+
+button#post-button::before {
+    content: "\f1d8"; /* Icon post to blogger*/
+}
+
+.cc_postgenerator {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cc_postgenerator h1 {
+    color: #3a5a40;
+}
+
+.cc_postgenerator p {
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.cc_postgenerator .tabs {
+    display: flex;
+    margin-top: 20px;
+    gap:0 5px
+}
+
+.cc_postgenerator .tab {
+    flex:1;
+    padding: 10px;
+    background-color: #999;
+    text-align: center;
+    cursor: pointer;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.cc_postgenerator .tab:hover {
+    background-color: #e9ecef;
+}
+
+.cc_postgenerator .tab.active {
+    background-color: #3a5a40;
+    color: white;
+}
+
+.cc_postgenerator .tab-content {
+    display: none;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 0 8px 8px 8px;
+}
+
+.cc_postgenerator .tab-content.active {
+    display: block;
+}
+
+#ntf_pg {
+    display:none;
+    background-color: #e9f7ef;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    font-size: 14px;
+    margin-top: 10px;
+}
+#ntf_pg.show {
+  display: block;
+  position: fixed;
+  top: 20%;
+  right:20px;
+  width: 300px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+#result-preview {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+#configAPI_custom input[type="text"] {
+    margin-bottom: 10px;
+    border: 1px solid #3a5a40;
+}
+
+@media (max-width: 768px) {
+    .cc_postgenerator button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .cc_postgenerator .tab {
+        border-radius: 8px;
+    }
+}
     </style>
 </head>
 <body>
-  <div class="faq-section">
-    <h2>FAQ: README</h2>    
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">1. Apa itu Format Postingan?</h3>
-        <div class="faq-answer">
-         <p>Format postingan adalah Code Post yang dapat kamu buat untuk menampilkan data anime. kamu dapat menggunakan {{data}} (yang diambil dari API.) untuk mengisi data code post kamu.</p>
-        </div>
-    </div>
 
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">2. data Apa yang Tersedia?</h3>
-        <div class="faq-answer">
-            <ul>
-                <li><strong>{{title}}</strong>: Judul anime.</li>
-                <li><strong>{{description}}</strong>: Deskripsi anime.</li>
-                <li><strong>{{bannerImage}}</strong>: URL gambar banner anime.</li>
-                <li><strong>{{coverImage}}</strong>: URL gambar cover anime.</li>
-                <li><strong>{{studios}}</strong>: Daftar studio yang memproduksi anime.</li>
-                <li><strong>{{genres}}</strong>: Daftar genre anime.</li>
-                <li><strong>{{episodes}}</strong>: Jumlah episode anime.</li>
-                <li><strong>{{duration}}</strong>: Durasi per episode anime.</li>
-                <li><strong>{{popularity}}</strong>: Popularitas anime (nilai numerik).</li>
-                <li><strong>{{averageScore}}</strong>: Rata-rata skor anime (nilai numerik).</li>
-                <li><strong>{{characters}}</strong>: Daftar karakter anime, termasuk gambar dan nama mereka.</li>
-            </ul>
-         <b>Lebih lengkap silahkan cek contohnya di FAQ 'Contoh Format Postingan'</b>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">3. Contoh Format Postingan</h3>
-        <div class="faq-answer">
-<p>Data yang dapat diambil dari Anilist dan MAL sedikit berbeda..</p>
-<b>contoh seperti ini</b>
-<h2>Anilist</h2>
-<ul>
-    <li><strong>{{title}}:</strong> Judul utama anime.</li>
-    <li><strong>{{bannerImage}}:</strong> URL gambar banner dari anime.</li>
-    <li><strong>{{coverImageExtraLarge}}:</strong> URL gambar cover ukuran extra besar dari anime.</li>
-    <li><strong>{{coverImageLarge}}:</strong> URL gambar cover ukuran besar dari anime.</li>
-    <li><strong>{{coverImageMedium}}:</strong> URL gambar cover ukuran medium dari anime.</li>
-    <li><strong>{{titleRomaji}}:</strong> Judul anime dalam Romaji (alfabet Latin berdasarkan pengucapan Jepang).</li>
-    <li><strong>{{titleEnglish}}:</strong> Judul anime dalam bahasa Inggris.</li>
-    <li><strong>{{titleJapanese}}:</strong> Judul anime dalam bahasa Jepang (kanji atau kana).</li>
-    <li><strong>{{titleSynonyms}}:</strong> Sinonim atau judul alternatif lainnya yang pernah digunakan untuk anime ini.</li>
-    <li><strong>{{description}}:</strong> Deskripsi atau sinopsis dari anime.</li>
-    <li><strong>{{format}}:</strong> Format anime (misalnya: TV, Movie, OVA).</li>
-    <li><strong>{{type}}:</strong> Jenis anime, apakah serial atau film.</li>
-    <li><strong>{{episodes}}:</strong> Jumlah total episode anime.</li>
-    <li><strong>{{status}}:</strong> Status anime (misalnya: Finished, Ongoing).</li>
-    <li><strong>{{startDate}}:</strong> Tanggal mulai penayangan anime.</li>
-    <li><strong>{{endDate}}:</strong> Tanggal akhir penayangan anime.</li>
-    <li><strong>{{season}}:</strong> Musim penayangan anime (misalnya: Winter, Spring).</li>
-    <li><strong>{{seasonYear}}:</strong> Tahun penayangan anime sesuai musimnya.</li>
-    <li><strong>{{averageScore}}:</strong> Skor rata-rata dari penilaian pengguna, dalam persen.</li>
-    <li><strong>{{meanScore}}:</strong> Skor rata-rata keseluruhan dari semua penilaian, dalam persen.</li>
-    <li><strong>{{popularity}}:</strong> Popularitas anime berdasarkan jumlah penggemar atau peringkat.</li>
-    <li><strong>{{studios}}:</strong> Nama-nama studios yang terlibat dalam pembuatan anime.</li>
-    <li><strong>{{genres}}:</strong> Genre anime (misalnya: Action, Comedy, Drama).</li>
-    
-     <li><strong>{{countryOfOrigin}}:</strong> Negara produksi anime.</li>
-     <li><strong>{{adult}}:</strong> Tag R-18/R-14.</li>
-     
-     <li><strong>{{licensors}}:</strong> Tag YES/NO</li>
-     <li><strong>{{chapters}}:</strong> Chapter (Manga)</li>
-     <li><strong>{{volumes}}:</strong> volumes (Manga)</li>
-     <li><strong>{{hashtag}}:</strong> hashtag anime.</li>
-     <li><strong>{{idMal}}</strong>ID Anime di situs MAL</li> 
-    <li><strong>{{source}}:</strong> Sumber data atau cerita asli anime (misalnya: Manga, Novel, Original).</li>
-    <li><strong>{{sourceID}}:</strong> ID sumber informasi anime (misalnya: ID pada database seperti MyAnimeList atau Anilist).</li>
-    <li><strong>{{staff}}:</strong> Daftar staff yg terlibat produksi anime.</li>
-    <li><strong>{{characters}}:</strong> Daftar characters dan voice actors (VA) Jepang.</li>
-</ul>
-<pre><code>
-&lt;div class=&quot;anime-info&quot;&gt;
-    &lt;h1&gt;{{title}}&lt;/h1&gt;
-
-    &lt;div class=&quot;banner-image&quot;&gt;
-        &lt;img src=&quot;{{bannerImage}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
-    &lt;/div&gt;
-    
-    &lt;div class=&quot;cover-image&quot;&gt;
-        &lt;h2&gt;Gambar size Extra large&lt;/h2&gt;
-        &lt;img src=&quot;{{coverImageExtraLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
-        
-        &lt;h2&gt;Gambar size large&lt;/h2&gt;
-        &lt;img src=&quot;{{coverImageLarge}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
-        
-        &lt;h2&gt;Gambar size medium&lt;/h2&gt;
-        &lt;img src=&quot;{{coverImageMedium}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
-    &lt;/div&gt;
+<div class="cc_postgenerator">
   
-    &lt;h2&gt;Alternative Titles&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Romaji:&lt;/strong&gt; {{titleRomaji}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;English:&lt;/strong&gt; {{titleEnglish}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Native:&lt;/strong&gt; {{titleJapanese}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Synonyms:&lt;/strong&gt; {{titleSynonyms}}&lt;/p&gt;
-
-    &lt;h2&gt;Description&lt;/h2&gt;
-    &lt;p&gt;{{description}}&lt;/p&gt;
-
-    &lt;h2&gt;Details&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;ID Mal:&lt;/strong&gt; {{idMal}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Format:&lt;/strong&gt; {{format}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Type:&lt;/strong&gt; {{type}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Episodes:&lt;/strong&gt; {{episodes}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Duration:&lt;/strong&gt; {{duration}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; {{status}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Start Date:&lt;/strong&gt; {{startDate}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;End Date:&lt;/strong&gt; {{endDate}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Season:&lt;/strong&gt; {{season}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Season Year:&lt;/strong&gt; {{seasonYear}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Average Score:&lt;/strong&gt; {{averageScore}}%&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Mean Score:&lt;/strong&gt; {{meanScore}}%&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Popularity:&lt;/strong&gt; {{popularity}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Volumes:&lt;/strong&gt; {{volumes}}&lt;/p&gt; 
-    &lt;p&gt;&lt;strong&gt;Chapters:&lt;/strong&gt; {{chapters}}&lt;/p&gt; 
-    &lt;p&gt;&lt;strong&gt;Is Adult:&lt;/strong&gt; {{adult}}&lt;/p&gt; 
-    &lt;p&gt;&lt;strong&gt;Country of Origin:&lt;/strong&gt; {{countryOfOrigin}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Is Licensed:&lt;/strong&gt; {{isLicensed}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Hashtag:&lt;/strong&gt; {{hashtag}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Studios:&lt;/strong&gt; {{studios}}&lt;/p&gt; 
-    &lt;p&gt;&lt;strong&gt;Genres:&lt;/strong&gt; {{genres}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Source:&lt;/strong&gt; {{source}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;SourceID:&lt;/strong&gt; {{sourceID}}&lt;/p&gt;
-    &lt;h2&gt;Staff&lt;/h2&gt;
-    &lt;div&gt;{{staff}}&lt;/div&gt; 
-    &lt;h2&gt;Characters&lt;/h2&gt;
-    &lt;div&gt;{{characters}}&lt;/div&gt;
-    
-&lt;/div&gt;
-</code></pre>
-
-<h2>MAL</h2>
-<ul>
-    <li><strong>{{title}}:</strong> Judul utama anime.</li>
-    <li><strong>{{coverImage}}:</strong> URL gambar cover dari anime.</li>
-
-    <li><strong>{{titleRomaji}}:</strong> Judul anime dalam Romaji (alfabet Latin berdasarkan pengucapan Jepang).</li>
-    <li><strong>{{titleEnglish}}:</strong> Judul anime dalam bahasa Inggris.</li>
-    <li><strong>{{titleJapanese}}:</strong> Judul anime dalam bahasa Jepang (kanji atau kana).</li>
-    <li><strong>{{titleSynonyms}}:</strong> Sinonim atau judul alternatif lainnya yang pernah digunakan untuk anime ini.</li>
-
-    <li><strong>{{description}}:</strong> Deskripsi atau sinopsis dari anime.</li>
-
-    <li><strong>{{type}}:</strong> Jenis atau format anime (misalnya: TV, Movie, OVA).</li>
-    <li><strong>{{episodes}}:</strong> Jumlah total episode anime.</li>
-    <li><strong>{{duration}}:</strong> Durasi rata-rata setiap episode dalam menit.</li>
-    <li><strong>{{status}}:</strong> Status anime (misalnya: Finished, Ongoing).</li>
-    <li><strong>{{aired}}:</strong> Rentang tanggal penayangan anime.</li>
-    <li><strong>{{premiered}}:</strong> Musim dan tahun pertama kali anime ditayangkan (misalnya: Spring 2023).</li>
-    <li><strong>{{broadcast}}:</strong> Informasi tentang waktu siaran anime (misalnya: setiap hari Rabu pukul 22:00).</li>
-
-    <li><strong>{{averageScore}}:</strong> Skor rata-rata dari penilaian pengguna.</li>
-    <li><strong>{{popularity}}:</strong> Popularitas anime berdasarkan jumlah penonton atau penggemar.</li>
-
-    <li><strong>{{studios}}:</strong> Studio animasi yang memproduksi anime.</li>
-    <li><strong>{{producers}}:</strong> Perusahaan produser yang terlibat dalam produksi anime.</li>
-    <li><strong>{{licensors}}:</strong> Perusahaan yang mendapatkan lisensi distribusi anime di luar negeri.</li>
-
-    <li><strong>{{genres}}:</strong> Genre atau kategori utama anime (misalnya: Action, Comedy, Drama).</li>
-    <li><strong>{{demographic}}:</strong> Target penonton berdasarkan demografi (misalnya: Shounen, Seinen).</li>
-   
-    <li><strong>{{source}}:</strong> Sumber data atau cerita asli anime (misalnya: Manga, Novel, Original).</li>
-    <li><strong>{{sourceID}}:</strong> ID sumber informasi anime (misalnya: ID pada database seperti MyAnimeList atau Anilist).</li>
-
-    <li><strong>{{rating}}:</strong> Klasifikasi usia atau rating anime (misalnya: PG-13, R-17).</li>
-</ul>
-<pre><code>
-&lt;div class=&quot;anime-info&quot;&gt;
-    &lt;h1&gt;{{title}}&lt;/h1&gt;
-    &lt;div class=&quot;cover-image&quot;&gt;
-        &lt;img src=&quot;{{coverImage}}&quot; alt=&quot;{{title}} Cover&quot; style=&quot;width: 100%; height: auto; max-width: 400px; margin-bottom: 20px;&quot; /&gt;
-    &lt;/div&gt;
-
-    &lt;h2&gt;Alternative Titles&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Romaji:&lt;/strong&gt; {{titleRomaji}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;English:&lt;/strong&gt; {{titleEnglish}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Japanese:&lt;/strong&gt; {{titleJapanese}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Synonyms:&lt;/strong&gt; {{titleSynonyms}}&lt;/p&gt;
-
-    &lt;h2&gt;Description&lt;/h2&gt;
-    &lt;p&gt;{{description}}&lt;/p&gt;
-
-    &lt;h2&gt;Details&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Type:&lt;/strong&gt; {{type}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Episodes:&lt;/strong&gt; {{episodes}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Episode Duration:&lt;/strong&gt; {{duration}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; {{status}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Aired:&lt;/strong&gt; {{aired}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Premiered:&lt;/strong&gt; {{premiered}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Broadcast:&lt;/strong&gt; {{broadcast}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Average Score:&lt;/strong&gt; {{averageScore}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Popularity:&lt;/strong&gt; {{popularity}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Studios:&lt;/strong&gt; {{studios}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Producers:&lt;/strong&gt; {{producers}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Licensors:&lt;/strong&gt; {{licensors}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Genres:&lt;/strong&gt; {{genres}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Demographic:&lt;/strong&gt; {{demographic}}&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;Source Informasi:&lt;/strong&gt; {{sourceID}}&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;Source GetPost:&lt;/strong&gt; {{source}}&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Rating:&lt;/strong&gt; {{rating}}&lt;/p&gt;
-&lt;/div&gt;
-</code></pre>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">4. Bagaimana Cara Menggunakan Generator Post ini?</h3>
-        <div class="faq-answer">
-            <ol>
-                <li><strong>Langkah 1:</strong> Tulis format postingan di textarea yang disediakan.</li>
-                <li><strong>Langkah 2:</strong> Gunakan {{data}} di dalam format post sesuai dengan data yang ingin ditampilkan.</li>
-                
-                <li><strong>Langkah 3:</strong> Klik tombol "Save Format post" untuk menyimpan format ke localStorage.</li>
-                
-                <li><strong>Langkah 4:</strong> Pilih Sumber ID Anime yang akan kamu gunakan</li>
-                                <li><strong>Langkah 5:</strong> Masukan ID Anime kedalam input "ENTER ID" dan Click "GetPost" </li>
-
-<li><strong>Langkah 6:</strong> Silahkan double cek data yg didapat apakah sudah benar, jika sudah maka copy dan paste ke blog kamu.(selesai)</li>
-            </ol>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">5. Bisakah Mengubah Format Postingan Setelah Menyimpannya?</h3>
-        <div class="faq-answer">
-            <p>Ya, Kamu dapat mengubah format postingan kapan saja. Cukup masukkan format baru di textarea dan simpan lagi dengan judul yang sama. Format baru akan menggantikan yang lama.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">6. Bagaimana Jika Aku Ingin Menghapus Format yang Disimpan?</h3>
-        <div class="faq-answer">
-            <p>Untuk menghapus format yang disimpan, Kamu dapat memilih format mana akan dihapus terlebih dahulu, setelah memilih maka click tombol hapus yg tersedia
-        </div>
-    </div>
-    
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">7. Bisakah membackup Format Postingan?</h3>
-        <div class="faq-answer">
-            <p>Ya, Kamu dapat mencadangkan format postingan kapan saja. cukup click tombol "Backup" dan tunggu beberapa Detik..file akan siap untuk didownload.</p>
-            <h3>Bagaimana Memulihkan data backup?</h3>
-            <p>Sangat Sederhana.. pertama click "pilih file" lalu cari dan pilih file hasil backup sebelumnya.. lalu click "pulihkan" hasil data backup akan kembali pulih</p>
-        </div>
-    </div>
-    
-    <div class="faq-item">
-        <h3 class="faq-question" onclick="toggleFAQ(this)">8. Kemana harus lapor jika menemukan bug?</h3>
-        <div class="faq-answer">
-            <p>Silahkan Lapor diforum https://datakodehiru.blogspot.com/p/forum.html</p>
-            <b>Atau</b>
-            https://github.com/MagicReincarnation/Generator-post-all-codepost/issues/1
-        </div>
-    </div>
-</div>
-
-
-<style>
-.faq-section {
-        margin: 20px;
-        font-family: Arial, sans-serif;
-    }
-    
-    .faq-question {
-        cursor: pointer;
-        background-color: #f1f1f1;
-        padding: 10px;
-        border: 1px solid #ddd;
-        margin-top: 5px;
-    }
-    
-    .faq-answer {
-        display: none;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-top: none;
-        background-color: #fff;
-    }
-    
-    pre {
-        background: #f8f8f8;
-        padding: 10px;
-        border: 1px solid #ddd;
-        overflow: auto;
-    }  
-</style>
-
-<script>
-    function toggleFAQ(e) {
-        const answer = e.nextElementSibling;
-        answer.style.display = answer.style.display === "block" ? "none" : "block";
-    }
-</script>
-
-
+<details><summary>Backup</summary>
 <button id="backup_preset_codepost">backup</button>
 <input type="file" id="pulihkan_preset_codepost" accept="application/json" />
 <button id="btn_pulihkan_preset_codepost">Pulihkan</button>
-
 <br/>
+</details>  
+          
+<!--New element v2.4-->
+<div id="cc_configAPI_custom">
+<div id="configAPI_custom">
+<label for="blog-id-post">BlogID:</label>         
+<input type="text" id="blog-id-input" placeholder="Masukkan Blog ID">
+<label for="client-id-input">Client ID:</label>
+<input  type="text" id="client-id-input" placeholder="Masukkan Client ID">
+  <label for="client-secret-input">Client ID secret:</label>
+<input  type="text" id="client-secret-input" placeholder="Masukkan Client Secret">
+  <label for="redirect-uri-input">Redirect URI:</label>
+<input type="text" id="redirect-uri-input" placeholder="Masukkan Redirect URI">
+<button id="save-config-button">Sumbit Config</button>
+       </div>
+<button id="login_google"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 128 128">
+	<path fill="#fff" d="M44.59 4.21a63.28 63.28 0 0 0 4.33 120.9a67.6 67.6 0 0 0 32.36.35a57.13 57.13 0 0 0 25.9-13.46a57.44 57.44 0 0 0 16-26.26a74.3 74.3 0 0 0 1.61-33.58H65.27v24.69h34.47a29.72 29.72 0 0 1-12.66 19.52a36.2 36.2 0 0 1-13.93 5.5a41.3 41.3 0 0 1-15.1 0A37.2 37.2 0 0 1 44 95.74a39.3 39.3 0 0 1-14.5-19.42a38.3 38.3 0 0 1 0-24.63a39.25 39.25 0 0 1 9.18-14.91A37.17 37.17 0 0 1 76.13 27a34.3 34.3 0 0 1 13.64 8q5.83-5.8 11.64-11.63c2-2.09 4.18-4.08 6.15-6.22A61.2 61.2 0 0 0 87.2 4.59a64 64 0 0 0-42.61-.38" />
+	<path fill="#e33629" d="M44.59 4.21a64 64 0 0 1 42.61.37a61.2 61.2 0 0 1 20.35 12.62c-2 2.14-4.11 4.14-6.15 6.22Q95.58 29.23 89.77 35a34.3 34.3 0 0 0-13.64-8a37.17 37.17 0 0 0-37.46 9.74a39.25 39.25 0 0 0-9.18 14.91L8.76 35.6A63.53 63.53 0 0 1 44.59 4.21" />
+	<path fill="#f8bd00" d="M3.26 51.5a63 63 0 0 1 5.5-15.9l20.73 16.09a38.3 38.3 0 0 0 0 24.63q-10.36 8-20.73 16.08a63.33 63.33 0 0 1-5.5-40.9" />
+	<path fill="#587dbd" d="M65.27 52.15h59.52a74.3 74.3 0 0 1-1.61 33.58a57.44 57.44 0 0 1-16 26.26c-6.69-5.22-13.41-10.4-20.1-15.62a29.72 29.72 0 0 0 12.66-19.54H65.27c-.01-8.22 0-16.45 0-24.68" />
+	<path fill="#319f43" d="M8.75 92.4q10.37-8 20.73-16.08A39.3 39.3 0 0 0 44 95.74a37.2 37.2 0 0 0 14.08 6.08a41.3 41.3 0 0 0 15.1 0a36.2 36.2 0 0 0 13.93-5.5c6.69 5.22 13.41 10.4 20.1 15.62a57.13 57.13 0 0 1-25.9 13.47a67.6 67.6 0 0 1-32.36-.35a63 63 0 0 1-23-11.59A63.7 63.7 0 0 1 8.75 92.4" />
+</svg>Login terlebih dahulu</button>
+</div>
+<!--New element v2.4-->
+  
+  
 <label for="preset_ON">Pilih preset:</label>
 <select id="preset_ON"></select>
 <button id="hapus_presetTersimpan">Hapus preset</button>
@@ -355,8 +239,7 @@
 <label for="judulpreset">Judul:</label>
 <input type="text" id="judulpreset" placeholder="Namai preset ini">
 <button id="svbutton">Save Format Post</button>
-  
-<div class="cc_getpost">
+  <div class="cc_getpost">
     <h1>GET POST</h1>
     <p>Generate blog posts data AniList, MyAnimeList</p>
     <label for="source_dataAnime_FectURL">Pilih Source ID:</label>
@@ -373,15 +256,21 @@
     
     <label for="id-input">Enter ID:</label>
     <input value="162804" type="text" id="id-input" placeholder="Enter ID from selected platform">
-
-    <button onclick="GetPost()">GePost</button>
+      
+      
+    <!--New element v2.4 -->
+     <label for="custom-label">Custom Label:</label>
+    <input type="text" id="custom-label" placeholder="custom label.. Series,Project,Update" />
+    <button id="save-label">Save custom label</button>
+        <!--New element v2.4 -->
+    
+<button onclick="GetPost()">GePost</button>
 
     <div>
         <div class="tabs">
             <button class="tab active" onclick="showTab(0)">Code</button>
             <button class="tab" onclick="showTab(1)">Preview</button>
         </div>
-
         <div class="tab-content active" id="result-code">
          <h2>Result Code</h2>
          <hr/>
@@ -396,19 +285,28 @@
             <div id="post-result"></div>
         </div>
         
-    </div>
+          </div>
+          
+<!--New element v2.4-->
+<ul class="logpost_blogger">
+</ul>
+<div id="ntf_pg"></div>
+<!--New element v2.4-->
+
+      </div>
+      
+      <p>© 2024 Siapa?™. All Rights Reserved.</p>
+      
 </div>
+54744
+
 
  <script>
-  configAPIKey = {
-  blogger:{
-    blogId:"",
-    apiKey:"",
-  },
-  TMDB:"",
+ configAPIKey = {
+  TMDB:"b6b0afcc3b7949d79323e31a950b7511",
   IMDB:"",//belum selesai dikerjakan
-    } 
-   </script>
+    }
+ </script>
  <script src="modular_v3.js"></script>
  <script src="main.js"></script>
  <script src="rendering.js"></script>
