@@ -52,27 +52,36 @@ async function fetchAniListData(id,type) {
       medium
     }
     bannerImage
-characters {
-  edges {
-    node {
-      name {
-        full
-      }
-      image {
-        large
+    characters {
+      edges {
+        node {
+          name {
+            full
+          }
+          description
+          age
+          gender
+          dateOfBirth {
+            year
+            month
+            day
+          }
+          image {
+            large
+          }
+        }
+        role
+        voiceActors {
+          name {
+            full
+          }
+          language
+          image {
+            large
+          }
+        }
       }
     }
-    voiceActors {
-      name {
-        full
-      }
-      language
-      image {
-        large
-      }
-    }
-  }
-}
     studios {
       edges {
         node {
@@ -94,7 +103,8 @@ characters {
     }
   }
 }
-      `,
+      
+     `,
       variables: { id: parseInt(id) }
     })
   });
@@ -174,6 +184,12 @@ function formatDate(dateSeries) {
 
 
 function mapAniListData(data) {
+  
+  function sortby_role(a, z) {
+    const listOrder_role = ['MAIN', 'SUPPORTING', 'BACKGROUND'];
+    return listOrder_role.indexOf(a.role) - listOrder_role.indexOf(z.role);
+  }
+ 
   return {
     title: {
       romaji: data.title.romaji || 'N/A',
@@ -212,12 +228,21 @@ function mapAniListData(data) {
     characters: data.characters.edges?.map(character => ({
       name: character.node.name.full,
       image: character.node.image.large,
-      voiceActors: character.voiceActors?.filter(va => va.language === 'JAPANESE').map(va => ({
-        name: va.name.full,
-        language: va.language,
-        image: va.image.large
-      })) || []
-    })) || [],
+      role: character.role || 'Unknown', 
+      description: character.node.description || 'No description available',
+      age: character.node.age || 'Unknown',
+      gender: character.node.gender || 'Unknown',
+      dateOfBirth: character.node.dateOfBirth 
+        ? `${character.node.dateOfBirth.day || '??'}/${character.node.dateOfBirth.month || '??'}/${character.node.dateOfBirth.year || '??'}` : 'Unknown',
+      voiceActors: character.voiceActors
+        ?.filter(va => va.language === 'JAPANESE')
+        .map(va => ({
+          name: va.name.full,
+          language: va.language,
+          image: va.image.large
+        })) || []
+    })).filter(character => character.role && character.description && character.gender).sort(sortby_role) || [], 
+    
     externalLinks: data.externalLinks?.map(link => ({
       site: link.site,
       url: link.url
