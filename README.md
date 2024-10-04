@@ -72,6 +72,32 @@ ikuti aja setiap intruksi yang ada divideo.
 ```
 4. Menghapus spasi pada input labels
 
+
+### Version 2.4 - 04 Okt, 2024
+
+1. Mengganti Code "Post to Bloggger" karena yang awal Salah code.
+     
+2. Menambahkan Data Charakter diGetpost Anilist
+
+   - `{{characters}}`: Daftar characters dan voice actors (VA) Jepang.
+
+ **NEW INFO:**
+terdapat data baru pada bagian `{{characters}}`, Berikut list data barunya `[age, gender, description, dateOfBirth]`.
+untuk menampilkan data baru pada characters
+
+maka gunakan tag ( dan ) lalu isi data baru kedalamnya dengan koma sebagai pemisa datanya, disarankan jangan ada spasi supaya tidak error..
+
+contohnya seperti ini :
+ {{characters(gender,age)}} : ini akan menampilkan gender dan age kedalam list characters
+  `{{characters(gender,age,description, dateOfBirth)}}` : ini akan menampilkan `gender,age,description, dateOfBirth` kedalam list characters
+untuk menghapusnya tinggal hilangkan saja datanya dari dalam ().
+
+3. Membuat Fitur custom Label silahkan baca [Bagaimana Cara Menggunakan Generator Post ini?](https://codehiru.blogspot.com/p/faq-post-generator.html?m=1)
+   
+4. Merubah lokasi config BlogID,ClienID,ClientID secret,Redirect URI  menjadi input yang disimpan dilocalstorage.
+   
+5. Memberikan style dasar sebelum style utama (wernayasa) selesai.
+   
 ### Credit 
 1. Roka (anilist & MAL)
 2. Hirutshuji (flexsibel data Anilist & MAL)
