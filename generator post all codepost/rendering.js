@@ -349,13 +349,18 @@ function loadLastpilihan_preset() {
     }
 }
 
+
 function display_inforSeries(data) {
         const format = loadpilihan_preset();
-        let postContent;
-
-        if (data.sourceID === 'Jikan') {
-           postContent = format
-     .replace(/{{title}}/g, data.title || 'Unknown')
+        
+    let postContent;
+      
+const titleL1 = data.title.romaji? data.title.romaji : data.title.english;
+const titleL2 = data.title? data.title : data.titleAlternatif.romaji;
+   
+    if (data.sourceID === 'Jikan') {
+     postContent = format
+     .replace(/{{title}}/g, titleL1? titleL1: titleL2)
      .replace(/{{titleRomaji}}/g, data.titleAlternatif.romaji || 'Unknown')
      .replace(/{{titleJapanese}}/g, data.titleAlternatif.japanese || 'Unknown')
       .replace(/{{titleEnglish}}/g, data.titleAlternatif.english || 'Unknown')
@@ -379,15 +384,53 @@ function display_inforSeries(data) {
       .replace(/{{producers}}/g, Array.isArray(data.producers) ? data.producers.join(', ') : 'N/A')
       .replace(/{{genres}}/g, Array.isArray(data.genres) ? data.genres.join(', ') : 'N/A')      
       .replace(/{{demographic}}/g, Array.isArray(data.demographic) ? data.demographic.join(', ') : 'N/A')
-      
+       .replace(/{{licensors}}/g, data.licensors || 'N/A')
+         .replace(/{{rating}}/g, data.rating || 'N/A')   .replace(/{{source}}/g, data.source || 'N/A')   .replace(/{{sourceID}}/g, data.sourceID || 'N/A')
+         
+        
+  } else if (data.sourceID === 'AniList') {
+   
+   function characters_va_html(character, showdatax) {
+    let showdata = showdatax;
+    let html = `
+      <div class="character">
+        <img src="${character.image}" alt="${character.name}" style="width: 100px; height: auto;" />
+        <p><strong>Character:</strong> ${character.name}</p>
+        <p><strong>Role:</strong> ${character.role}</p>`;
+        
+        
+   if (showdata.includes('description') && character.description) {
+   html += `<p><strong>Description:</strong> ${character.description}</p>`;
+    }
 
-.replace(/{{licensors}}/g, data.licensors || 'N/A')
-      
-.replace(/{{rating}}/g, data.rating || 'N/A')          .replace(/{{source}}/g, data.source || 'N/A')
- .replace(/{{sourceID}}/g, data.sourceID || 'N/A')
-        } else if (data.sourceID === 'AniList') {
-        postContent = format
-    .replace(/{{title}}/g, data.title.romaji || data.title.english)
+    if (showdata.includes('gender') && character.gender) {
+        html += `<p><strong>Gender:</strong> ${character.gender}</p>`;
+    }
+    if (showdata.includes('age') && character.age) {
+        html += `<p><strong>Age:</strong> ${character.age}</p>`;
+    }
+    if (showdata.includes('dateOfBirth') && character.dateOfBirth) {
+        html += `<p><strong>Date of Birth:</strong> ${character.dateOfBirth}</p>`;
+    }
+    html += `
+        <div class="voice-actors">
+          <h4>Voice Actors:</h4>
+          ${character.voiceActors
+            .filter(va => va.language === 'JAPANESE')
+            .map(va => `
+              <div class="voice-actor">
+                <img src="${va.image}" alt="${va.name}" style="width: 80px; height: auto;" />
+                <p class="va_mame"><strong>${va.name}</strong></p>
+                <p class="va_language">${va.language}</p>
+              </div>
+            `).join('')}
+        </div>
+      </div>
+    `;
+    return html;
+    } 
+    postContent = format
+    .replace(/{{title}}/g, titleL1? titleL1: titleL2)
     .replace(/{{titleRomaji}}/g, data.title.romaji || 'Unknown')
     .replace(/{{titleEnglish}}/g, data.title.english || 'Unknown')
     .replace(/{{titleJapanese}}/g, data.title.japanese || 'Unknown')
@@ -416,9 +459,8 @@ function display_inforSeries(data) {
     .replace(/{{countryOfOrigin}}/g, data.countryOfOrigin || 'N/A')  
     .replace(/{{licensors}}/g, data.isLicensed ? 'Yes' : 'No')  
     .replace(/{{hashtag}}/g, data.hashtag || 'N/A')  
-   
-    .replace(/{{studios}}/g, Array.isArray(data.studios) ? data.studios.join(', ') : 'N/A')  
-  
+ 
+    .replace(/{{studios}}/g, Array.isArray(data.studios) ? data.studios.join(', ') : 'N/A')    
     .replace(/{{genres}}/g, Array.isArray(data.genres) ? data.genres.join(', ') : 'N/A')
     .replace(/{{externalLinks}}/g, data.externalLinks.map(link => `
   <div class="external-link">
@@ -427,29 +469,28 @@ function display_inforSeries(data) {
     </a>
   </div>
 `).join('') || 'N/A')
+
     .replace(/{{staff}}/g, data.staff.map(staffMember => `
         <div class="staff">
             <img src="${staffMember.image}" alt="${staffMember.name}" style="width: 100px; height: auto;" />
             <p><strong>Staff:</strong> ${staffMember.name} - ${staffMember.role}</p>
         </div>
     `).join('') || 'N/A') 
-    .replace(/{{characters}}/g, data.characters.map(character => `
-  <div class="character">
-    <img src="${character.image}" alt="${character.name}" style="width: 100px; height: auto;" />
-    <p><strong>Character:</strong> ${character.name}</p>
-    <div class="voice-actors">
-      <h4>Voice Actors:</h4>
-      ${character.voiceActors.map(va => `
-        <div class="voice-actor">
-          <img src="${va.image}" alt="${va.name}" style="width: 80px; height: auto;" />
-          <p><strong>${va.name}</strong></p>
-          <p><strong>(${va.language})</strong></p>
-        </div>
-      `).join('')}
-    </div>
-  </div>
-`).join('') || 'N/A')
+    
+    .replace(/{{characters(?:\(([^)]*)\))?}}/g, (match, p1) => {
+    
+     if (p1){
+   let showdata = p1.split(',').map(item => item.trim()); 
+  if (showdata) {
+    return data.characters.map(character => characters_va_html(character, showdata)).join('') || 'N/A';
+       }
+    }else {
+    let showdata = [];
+    return data.characters.map(character => characters_va_html(character, showdata)).join('') || 'N/A';
+  }
+})    
     .replace(/{{source}}/g, data.source || 'N/A') .replace(/{{sourceID}}/g, data.sourceID || 'N/A')  
+    
     } else if (data.sourceID === 'TMDB') {
     postContent = format
       .replace(/{{title}}/g, data.title || 'Unknown')
@@ -483,22 +524,52 @@ function display_inforSeries(data) {
       .replace(/{{genres}}/g, Array.isArray(data.genres) ? data.genres.join(', ') : 'N/A')
       .replace(/{{sourceID}}/g, data.sourceID || 'N/A')
 
-         } else {
-            postContent = 'Sumber tidak ada.';
-        }
+   } else {
+      postContent = 'Sumber tidak ada.';        
+}
 
-        document.getElementById('post-result').innerHTML = postContent;
+        
+document.getElementById('post-result').innerHTML = postContent;
 
-        if (data.sourceID === 'AniList') {
+document.getElementById('ntf_pg').innerHTML = "Getpost Berhasil...";
+ 
+  setTimeout(() => {
+document.getElementById('ntf_pg').classList.remove('show');
+    }, 3000);
+    
+
+  if (data.sourceID === 'AniList') {
       document.getElementById('blogger-title').value = data.title.romaji ? data.title.romaji : data.title.english;
         } else {
       document.getElementById('blogger-title').value = data.title ? data.title : 'error';
-        }
+  }
+    
+const genresdt = localStorage.getItem('customLabel') +','+ (titleL1? titleL1: titleL2) + ',' + data.genres.join(',');
 
-        document.getElementById('blogger-labels').value = Array.isArray(data.genres) ? data.genres.join(',') : '';
-        document.getElementById('blogger-content').value = postContent;
+document.getElementById('blogger-labels').value = genresdt;
+
+document.getElementById('blogger-content').value = postContent;
     }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const storedLabel = localStorage.getItem('customLabel');
+    const customLabelInput = document.getElementById('custom-label');
+    if (storedLabel) {
+        customLabelInput.value = storedLabel;
+    }
+});
+
+document.getElementById('save-label').addEventListener('click', () => {
+    const customLabelInput = document.getElementById('custom-label');
+ 
+    document.getElementById('ntf_pg').classList.add('show');
+    const label = customLabelInput.value.trim();
+    document.getElementById('ntf_pg').innerHTML = "Custom label telah disimpan...";
+localStorage.setItem('customLabel', label);
+  setTimeout(() => {
+document.getElementById('ntf_pg').classList.remove('show');
+    }, 3000);
+});
 
 const typeOption= {
     anilist: ['ANIME', 'MANGA'],
@@ -525,7 +596,9 @@ async function GetPost() {
     const source_dataAnime_FectURL = document.getElementById('source_dataAnime_FectURL').value;
     const type_dataAnime_FectURL = document.getElementById('type_dataAnime_FectURL').value;
     const id = document.getElementById('id-input').value;
-    
+document.getElementById('ntf_pg').classList.add('show');
+document.getElementById('ntf_pg').innerHTML = "Getpost loading...";
+
     if (!id) {
         alert('Masukan ID Terlebih dahulu');
         return;
