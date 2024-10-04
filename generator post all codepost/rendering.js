@@ -264,10 +264,9 @@ anilist_demo: `
     <p><strong>SourceID:</strong> {{sourceID}}</p>
 </div>`,
 };
-
-
+        
 function savePreset() {
-    const formatPost = document.getElementById('formatpost').value;
+    const formatPost = textarea_preset.getValue();  
     const judulpreset = document.getElementById('judulpreset').value.trim();
 
     if (!judulpreset) {
@@ -314,11 +313,11 @@ function loadpilihan_preset() {
     const preset_ON = document.getElementById('preset_ON');
     const pilihan_preset = preset_ON.value;
     if (!pilihan_preset) {
-        document.getElementById('formatpost').value = '';
+       textarea_preset.setValue(''); 
         return;
     }
     const storage_preset = { ...presetDefault, ...loadstorage_preset() };
-    document.getElementById('formatpost').value = storage_preset[pilihan_preset] || '';
+    textarea_preset.setValue(storage_preset[pilihan_preset] || ''); 
     localStorage.setItem('lastpilihan_preset', pilihan_preset);
     return storage_preset[pilihan_preset];
 }
@@ -350,6 +349,7 @@ function loadLastpilihan_preset() {
 }
 
 
+        
 function display_inforSeries(data) {
         const format = loadpilihan_preset();
         
@@ -543,12 +543,14 @@ document.getElementById('ntf_pg').classList.remove('show');
         } else {
       document.getElementById('blogger-title').value = data.title ? data.title : 'error';
   }
-    
-const genresdt = localStorage.getItem('customLabel') +','+ (titleL1? titleL1: titleL2) + ',' + data.genres.join(',');
+const customL = localStorage.getItem('customLabel'),
+customLcek = customL? customL + ',':'';
+     
+const genresdt =  customLcek + (titleL1? titleL1: titleL2) + ',' + data.genres.join(',');
 
 document.getElementById('blogger-labels').value = genresdt;
 
-document.getElementById('blogger-content').value = postContent;
+textarea_ouputGetpost.setValue(postContent);
     }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -592,6 +594,8 @@ function run_typeOption() {
 }
 document.getElementById('source_dataAnime_FectURL').addEventListener('change', run_typeOption);
 run_typeOption();
+
+
 async function GetPost() {
     const source_dataAnime_FectURL = document.getElementById('source_dataAnime_FectURL').value;
     const type_dataAnime_FectURL = document.getElementById('type_dataAnime_FectURL').value;
@@ -661,11 +665,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('pulihkan_preset_codepost').click();
     });
     document.getElementById('preset_ON').addEventListener('change', loadpilihan_preset);
-    document.getElementById('svbutton').addEventListener('click', savePreset);
+    
+document.getElementById('svbutton').addEventListener('click', savePreset);
+ 
     document.getElementById('hapus_presetTersimpan').addEventListener('click', hapus_presetTersimpan);
 
     const savedFormat = loadpilihan_preset();
-    document.getElementById('formatpost').value = savedFormat;
+    textarea_preset.setValue(savedFormat);
 });
 
 function setupTabs() {

@@ -12,6 +12,7 @@ const accessToken_pg = localStorage.getItem('accessToken_pg');
 const ntf_pg = document.getElementById('ntf_pg');
 const logpost_blogger_ul = document.querySelector('.logpost_blogger');
 const logingoogle = document.getElementById('login_google');
+const txtLogin = document.getElementById('txtLogin');
 const postbutton = document.getElementById('post-button');
 
 
@@ -87,6 +88,7 @@ async function codeToken_pg(code_pg) {
         
       ntf_pg.classList.add('show');
       ntf_pg.innerText = 'Login berhasil!';
+      postbutton.style.display = 'block';
     } else {
         console.error("Error :", data_pg);
     }
@@ -212,10 +214,11 @@ async function post_blogger_pg(title_pg, labels_pg, content_pg) {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-if (!accessToken_pg) {
-      postbutton.style.display = 'none';
-    }else {
+if (accessToken_pg) {
       postbutton.style.display = 'block';
+      txtLogin.innerHTML = "Telah Login🛡️";
+    }else {
+      postbutton.style.display = 'none';
    }
 });
 

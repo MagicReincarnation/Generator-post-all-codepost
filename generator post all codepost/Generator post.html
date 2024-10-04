@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post Generator</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/theme/material-darker.min.css">
+
   <style>
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -193,6 +196,20 @@ button#post-button::before {
         border-radius: 8px;
     }
 }
+
+#txtLogin {color:#fff;}
+
+        .CodeMirror {
+            height: auto;
+            min-height: 300px;
+            border: 1px solid #30363d;
+            font-size: 16px;
+        }
+        .editor-wrapper {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
     </style>
 </head>
 <body>
@@ -212,14 +229,15 @@ button#post-button::before {
 <label for="blog-id-post">BlogID:</label>         
 <input type="text" id="blog-id-input" placeholder="Masukkan Blog ID">
 <label for="client-id-input">Client ID:</label>
-<input  type="text" id="client-id-input" placeholder="Masukkan Client ID">
+<input type="text" id="client-id-input" placeholder="Masukkan Client ID">
   <label for="client-secret-input">Client ID secret:</label>
-<input  type="text" id="client-secret-input" placeholder="Masukkan Client Secret">
+<input type="text" id="client-secret-input" placeholder="Masukkan Client Secret">
   <label for="redirect-uri-input">Redirect URI:</label>
 <input type="text" id="redirect-uri-input" placeholder="Masukkan Redirect URI">
 <button id="save-config-button">Sumbit Config</button>
        </div>
-<button id="login_google"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 128 128">
+<button id="login_google">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 128 128">
 	<path fill="#fff" d="M44.59 4.21a63.28 63.28 0 0 0 4.33 120.9a67.6 67.6 0 0 0 32.36.35a57.13 57.13 0 0 0 25.9-13.46a57.44 57.44 0 0 0 16-26.26a74.3 74.3 0 0 0 1.61-33.58H65.27v24.69h34.47a29.72 29.72 0 0 1-12.66 19.52a36.2 36.2 0 0 1-13.93 5.5a41.3 41.3 0 0 1-15.1 0A37.2 37.2 0 0 1 44 95.74a39.3 39.3 0 0 1-14.5-19.42a38.3 38.3 0 0 1 0-24.63a39.25 39.25 0 0 1 9.18-14.91A37.17 37.17 0 0 1 76.13 27a34.3 34.3 0 0 1 13.64 8q5.83-5.8 11.64-11.63c2-2.09 4.18-4.08 6.15-6.22A61.2 61.2 0 0 0 87.2 4.59a64 64 0 0 0-42.61-.38" />
 	<path fill="#e33629" d="M44.59 4.21a64 64 0 0 1 42.61.37a61.2 61.2 0 0 1 20.35 12.62c-2 2.14-4.11 4.14-6.15 6.22Q95.58 29.23 89.77 35a34.3 34.3 0 0 0-13.64-8a37.17 37.17 0 0 0-37.46 9.74a39.25 39.25 0 0 0-9.18 14.91L8.76 35.6A63.53 63.53 0 0 1 44.59 4.21" />
 	<path fill="#f8bd00" d="M3.26 51.5a63 63 0 0 1 5.5-15.9l20.73 16.09a38.3 38.3 0 0 0 0 24.63q-10.36 8-20.73 16.08a63.33 63.33 0 0 1-5.5-40.9" />
@@ -234,8 +252,12 @@ button#post-button::before {
 <select id="preset_ON"></select>
 <button id="hapus_presetTersimpan">Hapus preset</button>
 <br/>
-<textarea id="formatpost" rows="10" placeholder="Code post"></textarea>
 
+
+ <div class="editor-wrapper">
+   <textarea class="editor" id="formatpost" rows="10" placeholder="Code post"></textarea>
+    </div>
+    
 <label for="judulpreset">Judul:</label>
 <input type="text" id="judulpreset" placeholder="Namai preset ini">
 <button id="svbutton">Save Format Post</button>
@@ -276,7 +298,11 @@ button#post-button::before {
          <hr/>
          <textarea id="blogger-title" rows="2" placeholder="Title"></textarea>
          <textarea id="blogger-labels" rows="3" placeholder="Label"></textarea>
-          <textarea id="blogger-content" rows="20" placeholder="Content"></textarea>
+         
+    <div class="editor-wrapper">
+  <textarea class="editor" id="blogger-content" rows="20" placeholder="Content"></textarea> 
+    </div>
+    
          <button id="post-button">Post to Blogger</button>
         </div>
 
@@ -295,7 +321,7 @@ button#post-button::before {
 
       </div>
       
-      <p>© 2024 Siapa?™. All Rights Reserved.</p>
+      <p>© 2024 Hirutshuji™. All Rights Reserved.</p>
       
 </div>
 54744
@@ -307,6 +333,34 @@ button#post-button::before {
   IMDB:"",//belum selesai dikerjakan
     }
  </script>
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script>
+     const textarea_ouputGetpost = CodeMirror.fromTextArea(document.getElementById('blogger-content'), {
+            lineNumbers: true,
+            mode: 'htmlmixed',
+            theme: 'material-darker',
+            tabSize: 2,
+            indentUnit: 2,
+            matchBrackets: true,
+            lineWrapping: true
+        });
+
+        const textarea_preset = CodeMirror.fromTextArea(document.getElementById('formatpost'), {
+            lineNumbers: true,
+            mode: 'htmlmixed',
+            theme: 'material-darker',
+            tabSize: 2,
+            indentUnit: 2,
+            matchBrackets: true,
+            lineWrapping: true
+        });
+    </script>
  <script src="modular_v3.js"></script>
  <script src="main.js"></script>
  <script src="rendering.js"></script>
