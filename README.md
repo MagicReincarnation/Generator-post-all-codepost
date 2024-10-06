@@ -78,7 +78,7 @@ ikuti aja setiap intruksi yang ada divideo.
 1. Mengganti Code "Post to Bloggger" karena yang awal Salah code.
      
 2. Menambahkan Data Charakter diGetpost Anilist
-
+   - `{{staff}}` : daftar para staff yang ikut produksi Anime/Manga
    - `{{characters}}`: Daftar characters dan voice actors (VA) Jepang.
 
  **NEW INFO:**
