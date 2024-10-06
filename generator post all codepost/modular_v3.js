@@ -235,7 +235,7 @@ function mapAniListData(data) {
       dateOfBirth: character.node.dateOfBirth 
         ? `${character.node.dateOfBirth.day || '??'}/${character.node.dateOfBirth.month || '??'}/${character.node.dateOfBirth.year || '??'}` : 'Unknown',
       voiceActors: character.voiceActors
-        ?.filter(va => va.language === 'JAPANESE')
+        ?.filter(va => va.language)
         .map(va => ({
           name: va.name.full,
           language: va.language,
