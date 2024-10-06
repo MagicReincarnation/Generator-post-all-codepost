@@ -416,7 +416,7 @@ const titleL2 = data.title? data.title : data.titleAlternatif.romaji;
         <div class="voice-actors">
           <h4>Voice Actors:</h4>
           ${character.voiceActors
-            .filter(va => va.language === 'JAPANESE')
+            .filter(va => va.language)
             .map(va => `
               <div class="voice-actor">
                 <img src="${va.image}" alt="${va.name}" style="width: 80px; height: auto;" />
