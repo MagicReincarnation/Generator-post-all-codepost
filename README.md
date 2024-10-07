@@ -73,7 +73,7 @@ ikuti aja setiap intruksi yang ada divideo.
 4. Menghapus spasi pada input labels
 
 
-### Version 2.4 - 04 Okt, 2024
+### Version 2.4 - 06 Okt, 2024
 
 1. Mengganti Code "Post to Bloggger" karena yang awal Salah code.
      
@@ -97,7 +97,13 @@ untuk menghapusnya tinggal hilangkan saja datanya dari dalam ().
 4. Merubah lokasi config BlogID,ClienID,ClientID secret,Redirect URI  menjadi input yang disimpan dilocalstorage.
    
 5. Memberikan style dasar sebelum style utama (wernayasa) selesai.
-   
+
+
+### Version 2.4 - 07 Okt, 2024
+1. perbaikan Bug post to blogger contentnya kosong dikarenakan
+salah dalam mengambil content
+awalnya `const content_pg = document.getElementById('blogger-content').value;` setelah pakai codeMirror harusnya `    const content_pg = textarea_ouputGetpost.getValue();`
+
 ### Credit 
 1. Roka (anilist & MAL)
 2. Hirutshuji (flexsibel data Anilist & MAL)
