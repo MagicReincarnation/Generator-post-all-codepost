@@ -232,7 +232,7 @@ if (authCode_pg) {
 document.getElementById('post-button').addEventListener('click', () => {
     const title_pg = document.getElementById('blogger-title').value;
     const labels_pg = document.getElementById('blogger-labels').value;
-    const content_pg = document.getElementById('blogger-content').value;
+    const content_pg = textarea_ouputGetpost.getValue();
     post_blogger_pg(title_pg, labels_pg, content_pg);
 });
 
