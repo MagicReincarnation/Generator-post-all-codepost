@@ -99,7 +99,7 @@ untuk menghapusnya tinggal hilangkan saja datanya dari dalam ().
 5. Memberikan style dasar sebelum style utama (wernayasa) selesai.
 
 
-### Version 2.4 - 07 Okt, 2024
+### Version 2.4.1 - 07 Okt, 2024
 1. perbaikan Bug post to blogger contentnya kosong dikarenakan
 salah dalam mengambil content
 awalnya `const content_pg = document.getElementById('blogger-content').value;` setelah pakai codeMirror harusnya `    const content_pg = textarea_ouputGetpost.getValue();`
